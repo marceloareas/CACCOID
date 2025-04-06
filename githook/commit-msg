@@ -1,0 +1,30 @@
+#!/bin/sh
+
+regex="^\[[A-Z]+\] (feat|fix|docs|style|refactor|test|chore): .+$"
+msg=$(cat "$1")
+
+if echo "$msg" | grep -Eq "^(--)?help$"; then
+  echo ""
+  echo "Formato de commit esperado"
+  echo ""
+  echo "Padrão:"
+  echo "    [ESCOPO] tipo: descrição da mudança"
+  echo ""
+  echo "Tipos permitidos:"
+  echo "    feat     → nova funcionalidade"
+  echo "    fix      → correção de bug"
+  echo "    docs     → apenas mudanças na documentação"
+  echo "    style    → mudanças de formatação (espaços, indentação, etc)"
+  echo "    refactor → alterações de código que não afetam o comportamento"
+  echo "    test     → adição ou melhoria de testes"
+  echo "    chore    → tarefas de manutenção (build, dependencies, etc)"
+  exit 1
+fi
+
+if ! echo "$msg" | grep -Eq "$regex"; then
+  echo "❌ Commit bloqueado: \"$msg\""
+  echo "A mensagem de commit deve seguir o padrão:"
+  echo "[ESCOPO] tipo: mensagem"
+  echo "Use '--help' como mensagem para ver as instruções"
+  exit 1
+fi
