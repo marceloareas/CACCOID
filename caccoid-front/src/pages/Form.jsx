@@ -4,9 +4,15 @@ import { useSchema } from "../hooks/useSchema"; // Ajuste conforme o caminho cor
 import { DevTool } from "@hookform/devtools";
 import { useState } from "react";
 import { UserDataForm } from "../components/form/UserDataForm";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentPage } from "../ducks/form";
 
 export const FormPage = () => {
   const { schema } = useSchema();
+
+  const dispatch = useDispatch();
+  const { currentPage } = useSelector((store) => store.form);
+
   const [step, setStep] = useState(0);
   const methods = useForm({
     defaultValues: schema.cast(),
@@ -14,7 +20,7 @@ export const FormPage = () => {
     mode: "all",
   });
 
-  console.log(methods.formState);
+  console.log("Form Page:", currentPage);
 
   return (
     <div className="form-page">
@@ -34,6 +40,9 @@ export const FormPage = () => {
                 }}
                 onBlur={onBlur}
                 value={value}
+                onClick={() => {
+                  dispatch(setCurrentPage(currentPage + 1));
+                }}
               />
             )}
           />
