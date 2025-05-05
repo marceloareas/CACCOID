@@ -1,7 +1,7 @@
 .form-windown {
   background-color: white;
   border-radius: 20px;
-  margin: 4rem 0;
+  margin: 6rem 0 4rem 0;
   padding: 2rem;
   box-sizing: border-box;
   display: flex;
@@ -11,7 +11,6 @@
 }
 
 .form-navigation-first-page {
-  margin-top: 2rem;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -19,7 +18,6 @@
 }
 
 .form-navigation {
-  margin-top: 2rem;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -47,3 +45,70 @@ button:hover {
 .next-button, .submit-button {
   background-color: #0C3561;
 }
+
+.prev-button > img {
+  padding-left: 0.75rem;
+  height: 1.35rem;
+  transform: rotate(180deg);
+}
+
+.next-button > img {
+  padding-left: 0.75rem;
+  height: 1.35rem;
+}
+
+input[type="file"] {
+  width: 100%;
+  text-align: center;
+  padding: 2rem 1rem 1rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.image-crop-container {
+  margin-top: 20px;
+  border: 1px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+}
+
+.crop-area {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 10px;
+  width: 2rem;
+  height: 2rem;
+}
+
+.form-input-description {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+

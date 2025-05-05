@@ -1,65 +1,53 @@
-import './styles.css'
+import { GenericStep } from "../../../components/form/form-step/GenericStep";
 
 export const CourseStep = ({ formData, updateFormData }) => {
-    const handleChange = (e) => {
-      updateFormData({ [e.target.name]: e.target.value });
-    };
-  
-    return (
-      <div className="form-step">
-        <h2>Dados do Curso</h2>
+  const educationLevels = [
+    { value: "", label: "Selecione o nível de ensino" },
+    { value: "graduacao", label: "Graduação" },
+    { value: "pos", label: "Pós-graduação" }
+  ];
 
-        <div className="form-group">
-          <p className="form-input-label">Nível de ensino<span>*</span></p>
-          <input
-            type="text"
-            id="courseName"
-            name="courseName"
-            placeholder='Selecione seu nível de ensino'
-            value={formData.courseName || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
+  const institutions = [
+    { value: "", label: "Selecione a instituição" },
+    { value: "CEFET-RJ", label: "CEFET-RJ - Campus Maracanã" },
+  ];
 
-        <div className="form-group">
-          <p className="form-input-label">Matrícula<span>*</span></p>
-          <input
-            type="text"
-            id="courseName"
-            name="courseName"
-            placeholder='Selecione seu nível de ensino'
-            value={formData.courseName || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
+  const courses = [
+    { value: "", label: "Selecione o curso" },
+    { value: "BCC", label: "Bacharelado em Ciência da Computação" },
+  ];
 
-        <div className="form-group">
-          <p className="form-input-label">Curso<span>*</span></p>
-          <input
-            type="text"
-            id="courseName"
-            name="courseName"
-            placeholder='Selecione seu nível de ensino'
-            value={formData.courseName || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <p className="form-input-label">Instituição de ensino<span>*</span></p>
-          <input
-            type="text"
-            id="courseName"
-            name="courseName"
-            placeholder='Selecione seu nível de ensino'
-            value={formData.courseName || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-      </div>
-    );
+  const fields = {
+    title: 'Dados do Curso',
+    column1: [
+      { 
+        name: 'educationLevel', 
+        label: 'Nível de ensino', 
+        type: 'select',
+        options: educationLevels
+      },
+      { 
+        name: 'registration', 
+        label: 'Matrícula', 
+        placeholder: 'Ex: 2112290BCC',
+        pattern: "^[0-9]{7}[a-zA-Z]{3}$"
+      },
+      { 
+        name: 'courseName', 
+        label: 'Curso', 
+        type: 'select',
+        options: courses
+      },
+      { 
+        name: 'institutionName', 
+        label: 'Instituição de ensino', 
+        type: 'select',
+        options: institutions
+      },
+    ],
+    column2: [],
+    uploadField: []
   };
+
+  return <GenericStep formData={formData} updateFormData={updateFormData} fields={fields} />;
+};

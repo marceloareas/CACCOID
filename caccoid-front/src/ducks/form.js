@@ -8,8 +8,18 @@ import creditCardIcon from '../assets/credit-card-icon.svg';
 const SET_CURRENT_PAGE = "form/SET_CURRENT_PAGE";
 const UPDATE_FORM_DATA = "form/UPDATE_FORM_DATA";
 
+const serializeFileList = (fileList) => {
+  if (!fileList || fileList.length === 0) return null;
+  return Array.from(fileList).map(file => ({
+    name: file.name,
+    size: file.size,
+    type: file.type,
+    lastModified: file.lastModified
+  }));
+};
+
 const initialState = {
-  currentPage: 0, 
+  currentPage: 0,
   formData: {},
   steps: [
     { id: 'course', icon: schoolHatIcon, title: 'Dados do Curso' },
@@ -29,6 +39,24 @@ const reducer = (state = initialState, action = {}) => {
         currentPage: action.payload,
       };
     case UPDATE_FORM_DATA:
+      const newData = { ...action.payload };
+
+      if (newData.enrollmentProof) {
+        newData.enrollmentProof = serializeFileList(newData.enrollmentProof);
+      }
+      if (newData.identityFront) {
+        newData.identityFront = serializeFileList(newData.identityFront);
+      }
+      if (newData.identityBack) {
+        newData.identityBack = serializeFileList(newData.identityBack);
+      }
+      if (newData.studentPhoto) {
+        newData.studentPhoto = serializeFileList(newData.studentPhoto);
+      }
+      if (newData.paymentProof) {
+        newData.paymentProof = serializeFileList(newData.paymentProof);
+      }
+
       return {
         ...state,
         formData: {

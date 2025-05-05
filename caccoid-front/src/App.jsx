@@ -1,5 +1,5 @@
 import "./App.css";
-import { FormPage } from "./pages/Form";
+// import { FormPage } from "./pages/Form";
 import { store } from "./store";
 import { Layout } from "./components/layout/layout";
 
@@ -13,9 +13,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/solicitation-form" element={<CardSolicitationForm/>}/>
-              <Route path="/" element={<FormPage />} />
-              <Route path="/form" element={<FormPage />} />
+              <Route path="/" element={<CardSolicitationForm/>}/>
+              {/* <Route path="/" element={<FormPage />} /> */}
+              {/* <Route path="/form" element={<FormPage />} /> */}
             </Route>
           </Routes>
         </BrowserRouter>

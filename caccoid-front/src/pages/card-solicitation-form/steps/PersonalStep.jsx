@@ -1,91 +1,20 @@
-import './styles.css'
+import { GenericStep } from "../../../components/form/form-step/GenericStep";
 
 export const PersonalStep = ({ formData, updateFormData }) => {
-    const handleChange = (e) => {
-      updateFormData({ [e.target.name]: e.target.value });
-    };
-  
-    return (
-      <div className="form-step">
-        <h2>Dados Pessoais</h2>
-
-        <div className="form-group">
-          <p className="form-input-label">Nome<span>*</span></p>
-          <input
-            type="text"
-            id="courseName"
-            name="courseName"
-            placeholder='Selecione seu nível de ensino'
-            value={formData.courseName || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <p className="form-input-label">E-mail<span>*</span></p>
-          <input
-            type="text"
-            id="courseName"
-            name="courseName"
-            placeholder='Selecione seu nível de ensino'
-            value={formData.courseName || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <p className="form-input-label">RG<span>*</span></p>
-          <input
-            type="text"
-            id="courseName"
-            name="courseName"
-            placeholder='Selecione seu nível de ensino'
-            value={formData.courseName || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <p className="form-input-label">Celular<span>*</span></p>
-          <input
-            type="text"
-            id="courseName"
-            name="courseName"
-            placeholder='Selecione seu nível de ensino'
-            value={formData.courseName || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <p className="form-input-label">CPF<span>*</span></p>
-          <input
-            type="text"
-            id="courseName"
-            name="courseName"
-            placeholder='Selecione seu nível de ensino'
-            value={formData.courseName || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <p className="form-input-label">Data de nascimento<span>*</span></p>
-          <input
-            type="text"
-            id="courseName"
-            name="courseName"
-            placeholder='Selecione seu nível de ensino'
-            value={formData.courseName || ''}
-            onChange={handleChange}
-            required
-          />
-        </div>
-      </div>
-    );
+  const fields = {
+    title: 'Dados pessoais',
+    column1: [
+      { name: 'fullName', label: 'Nome Completo', placeholder: 'Digite seu nome completo' },
+      { name: 'rg', label: 'RG', type: 'rg', placeholder: '00.000.000-0' },
+      { name: 'cpf', label: 'CPF', type: 'cpf', placeholder: '000.000.000-00' },
+      { name: 'birthDate', label: 'Data de nascimento', type: 'date' },
+    ],
+    column2: [
+      { name: 'email', label: 'E-mail', type: 'email', placeholder: 'seu@email.com' },
+      { name: 'phoneNumber', label: 'Celular', type: 'phone', placeholder: '(00) 00000-0000' },
+    ],
+    uploadField: []
   };
+
+  return <GenericStep formData={formData} updateFormData={updateFormData} fields={fields} />;
+};

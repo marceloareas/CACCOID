@@ -1,60 +1,72 @@
-.form-step {
-    width: 100%;
-    text-align: start;
-    display: grid;
-    grid-template-rows: 1fr;
+.checkbox-group {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
-
-h2 {
-    margin-bottom: 0;
+  
+.checkbox-group > p {
     color: black;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.25rem;
-}
-
-.form-group {
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    box-sizing: border-box;
-
-}
-
-.form-input-label {
-    color: black;
-    margin-bottom: 0.25rem;
     font-family: 'Roboto Mono', monospace;
     font-weight: bold;
-    font-size: 1.75rem;
-}
-
-p > span {
-    color: #F04036;
-}
-
-input {
-    font-family: 'Roboto Mono', monospace;
     font-size: 1.5rem;
-    color: black;
-    background-color: white;
+    margin-right: 1rem;
+}
+  
+input[type="checkbox"] {
+    width: 2.2rem;
+    height: 2.2rem;
+}
+
+select {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.5rem;
+  color: black;
+  background-color: white;
+  border: 2px solid #D9D9D9;
+  border-radius: 10px;
+  width: 30vw;
+  height: 3.5rem;
+  padding-left: 0.8rem;
+}
+
+select:hover, select:hover {
+  border: 2px solid #00aaff; 
+  outline: none;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 12px;
     border: 2px solid #D9D9D9;
-    border-radius: 10px;
-    width: 30vw;
-    height: 3rem;
-    padding-left: 0.8rem;
-}
-
-input:focus, input:hover {
-    border: 2px solid #00aaff; 
-    outline: none;
-}
-
-input::placeholder {
-    color: #000000;
-    opacity: 0.3;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1.5rem;
-    padding-left: 0.8rem;
-}
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+  
+  .image-crop-container {
+    margin-top: 20px;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .crop-area {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .form-input-description {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 4px;
+  }
+  
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
