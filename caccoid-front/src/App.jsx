@@ -1,4 +1,5 @@
 import "./App.css";
+import Navbar from "./components/Navbar";
 import { FormPage } from "./pages/Form";
 import { store } from "./store";
 
@@ -10,6 +11,7 @@ function App() {
     <>
       <ReduxProvider store={store}>
         <BrowserRouter>
+          <Navbar />
           <h1>Hello World</h1>
           <Routes>
             <Route path="/" element={<FormPage />} />
