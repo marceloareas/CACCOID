@@ -6,8 +6,8 @@
   font-weight: 400;
 
   color-scheme: light;
-  color: #0c3561;
-  background-color: #ffffff;
+  color: #000000;
+  background-color: #f4f4f4;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -22,7 +22,6 @@
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
   font-family: var(--font-regular);
@@ -31,6 +30,7 @@ body {
 h1,
 h2 {
   font-family: var(--font-title);
+  color: #0c3561;
 }
 
 h3,

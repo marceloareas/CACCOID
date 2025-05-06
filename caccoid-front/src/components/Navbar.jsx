@@ -41,6 +41,7 @@ const LogoAndTitle = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  max-height: 70px;
 `;
 
 export default function Navbar() {
@@ -53,6 +54,7 @@ export default function Navbar() {
         </LogoAndTitle>
       </NavLink>
       <NavLink to="/login">Login</NavLink>
+      <NavLink to="/login-microsoft">Login Microsoft</NavLink>
     </Nav>
   );
 }
