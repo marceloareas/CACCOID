@@ -1,9 +1,34 @@
+import personIcon from '../assets/person-icon.svg';
+import schoolHatIcon from '../assets/school-hat-icon.svg';
+import documentIcon from '../assets/document-icon.svg';
+import imageIcon from '../assets/image-icon.svg';
+import locationIcon from '../assets/location-icon.svg';
+import creditCardIcon from '../assets/credit-card-icon.svg';
+
 const SET_CURRENT_PAGE = "form/SET_CURRENT_PAGE";
-const TOGGLE_MODAL = "form/TOGGLE_MODAL";
+const UPDATE_FORM_DATA = "form/UPDATE_FORM_DATA";
+
+const serializeFileList = (fileList) => {
+  if (!fileList || fileList.length === 0) return null;
+  return Array.from(fileList).map(file => ({
+    name: file.name,
+    size: file.size,
+    type: file.type,
+    lastModified: file.lastModified
+  }));
+};
 
 const initialState = {
   currentPage: 0,
-  toggleModal: false,
+  formData: {},
+  steps: [
+    { id: 'course', icon: schoolHatIcon, title: 'Dados do Curso' },
+    { id: 'personal', icon: personIcon, title: 'Dados Pessoais' },
+    { id: 'documents', icon: documentIcon, title: 'Documentos' },
+    { id: 'localization', icon: locationIcon, title: 'Local de Retirada' },
+    { id: 'photo', icon: imageIcon, title: 'Foto da Carteirinha' },
+    { id: 'payment', icon: creditCardIcon, title: 'Comprovante de Pagamento' }
+  ]
 };
 
 const reducer = (state = initialState, action = {}) => {
@@ -11,26 +36,38 @@ const reducer = (state = initialState, action = {}) => {
     case SET_CURRENT_PAGE:
       return {
         ...state,
-        currentPage: action.currentPage,
+        currentPage: action.payload,
       };
-    case TOGGLE_MODAL:
+    case UPDATE_FORM_DATA:
+      const newData = { ...action.payload };
+
+      const fileFields = ['enrollmentProof', 'identityFront', 'identityBack', 'studentPhoto', 'paymentProof'];
+      fileFields.forEach(field => {
+        if (newData[field] instanceof FileList) {
+          newData[field] = serializeFileList(newData[field]);
+        }
+      });
+
       return {
         ...state,
-        toggleModal: !state.toggleModal,
+        formData: {
+          ...state.formData,
+          ...action.payload
+        }
       };
-    default: {
+    default:
       return state;
-    }
   }
 };
 
 export default reducer;
 
-export const setCurrentPage = (currentPage) => ({
+export const setCurrentPage = (page) => ({
   type: SET_CURRENT_PAGE,
-  currentPage,
+  payload: page
 });
 
-export const toggleModal = () => ({
-  type: TOGGLE_MODAL,
+export const updateFormData = (data) => ({
+  type: UPDATE_FORM_DATA,
+  payload: data
 });
