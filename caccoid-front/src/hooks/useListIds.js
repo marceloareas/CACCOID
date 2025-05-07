@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useAPI } from "./useAPI";
+import { useState, useEffect } from 'react';
+import { useAPI } from './useAPI';
 
 export const useListIds = (endpoint) => {
   const [data, setData] = useState([]);
@@ -18,7 +18,7 @@ export const useListIds = (endpoint) => {
         const response = await api.get(endpoint);
         setData(response.data);
       } catch (err) {
-        console.error("Erro ao buscar dados:", err);
+        console.error('Erro ao buscar dados:', err);
         setError(err);
       } finally {
         setLoading(false);

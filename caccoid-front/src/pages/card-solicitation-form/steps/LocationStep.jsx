@@ -1,18 +1,18 @@
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from 'react-hook-form';
 import { useEffect } from 'react';
 import './styles.css';
 
 export const LocationStep = () => {
   const { control, watch, setValue } = useFormContext();
-  const pickupAtCampus = watch("pickupAtCampus");
+  const pickupAtCampus = watch('pickupAtCampus');
 
   const pickupOptions = [
     { value: '', label: 'Selecione um local de retirada' },
-    { value: 'Sala do DCE', label: 'Cefet-RJ - Campus Maracanã' }
+    { value: 'Sala do DCE', label: 'Cefet-RJ - Campus Maracanã' },
   ];
 
   useEffect(() => {
-    setValue("pickupAtCampus", pickupAtCampus || false);
+    setValue('pickupAtCampus', pickupAtCampus || false);
   }, [pickupAtCampus, setValue]);
 
   return (
@@ -26,7 +26,9 @@ export const LocationStep = () => {
               control={control}
               render={({ field }) => (
                 <div className="checkbox-group">
-                  <p className="checkbox-label">Deseja adquirir carteirinha física?</p>
+                  <p className="checkbox-label">
+                    Deseja adquirir carteirinha física?
+                  </p>
                   <label>
                     <input
                       type="checkbox"
@@ -34,7 +36,7 @@ export const LocationStep = () => {
                       onChange={(e) => field.onChange(e.target.checked)}
                     />
                   </label>
-                </div>  
+                </div>
               )}
             />
           </div>
@@ -48,10 +50,8 @@ export const LocationStep = () => {
                 defaultValue=""
                 render={({ field }) => (
                   <>
-                    <select 
-                      {...field}
-                    >
-                      {pickupOptions.map(option => (
+                    <select {...field}>
+                      {pickupOptions.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                         </option>

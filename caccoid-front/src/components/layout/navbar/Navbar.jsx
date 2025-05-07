@@ -3,11 +3,9 @@ import './styles.css';
 import logo from '../../../assets/logo.svg';
 import userIcon from '../../../assets/user-icon.svg';
 
-
 export const Navbar = () => {
-    const [userName, setUserName] = useState('Aluno');
+  const [userName, setUserName] = useState('Aluno');
 
-    
   return (
     <nav className="navbar">
       <div className="navbar-left">

@@ -1,12 +1,12 @@
-import * as S from "./styles";
+import * as S from './styles';
 
 export const ActionButton = ({
   className,
-  variant = "primary",
+  variant = 'primary',
   children,
   disabled,
   size,
-  type = "button",
+  type = 'button',
   onClick,
   iconSrc,
   ...props

@@ -31,9 +31,9 @@
 //                 defaultValue={formData[name] || ""}
 //                 render={({ field }) => (
 //                   <>
-//                     <input 
-//                       {...field} 
-//                       type={type} 
+//                     <input
+//                       {...field}
+//                       type={type}
 //                       placeholder={placeholder}
 //                       className={`form-input ${errors[name] ? 'error' : ''}`}
 //                     />
@@ -58,9 +58,9 @@
 //                   defaultValue={formData[name] || ""}
 //                   render={({ field }) => (
 //                     <>
-//                       <input 
-//                         {...field} 
-//                         type={type} 
+//                       <input
+//                         {...field}
+//                         type={type}
 //                         placeholder={placeholder}
 //                         className={`form-input ${errors[name] ? 'error' : ''}`}
 //                       />
@@ -79,17 +79,21 @@
 //   );
 // };
 
-import { Controller, useFormContext } from "react-hook-form";
-import { useEffect, useRef } from "react";
-import { isEqual } from "lodash";
-import { InputMask } from "../../utils/inputs-masks/InputMasks";
+import { Controller, useFormContext } from 'react-hook-form';
+import { useEffect, useRef } from 'react';
+import { isEqual } from 'lodash';
+import { InputMask } from '../../utils/inputs-masks/InputMasks';
 import './styles.css';
 
 export const GenericStep = ({ fields, formData, updateFormData }) => {
-  const { control, watch, formState: { errors } } = useFormContext();
+  const {
+    control,
+    watch,
+    formState: { errors },
+  } = useFormContext();
   const previousValues = useRef(formData);
 
-  const fieldNames = [...fields.column1, ...fields.column2].map(f => f.name);
+  const fieldNames = [...fields.column1, ...fields.column2].map((f) => f.name);
   const watchedValues = watch(fieldNames);
 
   useEffect(() => {
@@ -99,17 +103,23 @@ export const GenericStep = ({ fields, formData, updateFormData }) => {
     }
   }, [watchedValues, updateFormData]);
 
-  const renderInput = ({ field, name, type = "text", placeholder, options }) => {
+  const renderInput = ({
+    field,
+    name,
+    type = 'text',
+    placeholder,
+    options,
+  }) => {
     const inputProps = {
       ...field,
       className: `form-input ${errors[name] ? 'error' : ''}`,
-      placeholder
+      placeholder,
     };
 
     if (type === 'select') {
       return (
         <select {...inputProps}>
-          {options?.map(option => (
+          {options?.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
@@ -132,11 +142,14 @@ export const GenericStep = ({ fields, formData, updateFormData }) => {
         <div className="form-first-column">
           {fields.column1.map((field) => (
             <div className="form-group" key={field.name}>
-              <p className="form-input-label">{field.label}<span>*</span></p>
+              <p className="form-input-label">
+                {field.label}
+                <span>*</span>
+              </p>
               <Controller
                 name={field.name}
                 control={control}
-                defaultValue={formData[field.name] || ""}
+                defaultValue={formData[field.name] || ''}
                 render={({ field: controllerField }) => (
                   <>
                     {renderInput({
@@ -144,10 +157,12 @@ export const GenericStep = ({ fields, formData, updateFormData }) => {
                       name: field.name,
                       type: field.type,
                       placeholder: field.placeholder,
-                      options: field.options
+                      options: field.options,
                     })}
                     {errors[field.name] && (
-                      <span className="error-message">{errors[field.name].message}</span>
+                      <span className="error-message">
+                        {errors[field.name].message}
+                      </span>
                     )}
                   </>
                 )}
@@ -160,11 +175,14 @@ export const GenericStep = ({ fields, formData, updateFormData }) => {
           <div className="form-second-column">
             {fields.column2.map((field) => (
               <div className="form-group" key={field.name}>
-                <p className="form-input-label">{field.label}<span>*</span></p>
+                <p className="form-input-label">
+                  {field.label}
+                  <span>*</span>
+                </p>
                 <Controller
                   name={field.name}
                   control={control}
-                  defaultValue={formData[field.name] || ""}
+                  defaultValue={formData[field.name] || ''}
                   render={({ field: controllerField }) => (
                     <>
                       {renderInput({
@@ -172,10 +190,12 @@ export const GenericStep = ({ fields, formData, updateFormData }) => {
                         name: field.name,
                         type: field.type,
                         placeholder: field.placeholder,
-                        options: field.options
+                        options: field.options,
                       })}
                       {errors[field.name] && (
-                        <span className="error-message">{errors[field.name].message}</span>
+                        <span className="error-message">
+                          {errors[field.name].message}
+                        </span>
                       )}
                     </>
                   )}

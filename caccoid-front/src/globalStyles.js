@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import "@fontsource/bebas-neue"; 
+import { createGlobalStyle } from 'styled-components';
+import '@fontsource/bebas-neue';
 
 const GlobalStyles = createGlobalStyle`
     :root {

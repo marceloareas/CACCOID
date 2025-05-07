@@ -23,7 +23,7 @@
   flex-direction: row;
   justify-content: space-between;
 }
-  
+
 button {
   font-family: 'Roboto Mono', monospace;
   font-weight: bold;
@@ -42,8 +42,9 @@ button:hover {
   background-color: #383838;
 }
 
-.next-button, .submit-button {
-  background-color: #0C3561;
+.next-button,
+.submit-button {
+  background-color: #0c3561;
 }
 
 .prev-button > img {
@@ -57,7 +58,7 @@ button:hover {
   height: 1.35rem;
 }
 
-input[type="file"] {
+input[type='file'] {
   width: 100%;
   text-align: center;
   padding: 2rem 1rem 1rem 1rem;
@@ -95,7 +96,7 @@ input[type="file"] {
   cursor: pointer;
 }
 
-.checkbox-group input[type="checkbox"] {
+.checkbox-group input[type='checkbox'] {
   margin-right: 10px;
   width: 2rem;
   height: 2rem;
@@ -111,4 +112,3 @@ button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
-

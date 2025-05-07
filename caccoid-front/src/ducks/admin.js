@@ -1,6 +1,6 @@
-const SET_CURRENT_STATE = "admin/SET_CURRENT_STATE";
-const SET_SELECTED_IDS = "admin/SET_SELECTED_IDS";
-const TOGGLE_MODAL = "admin/TOGGLE_MODAL";
+const SET_CURRENT_STATE = 'admin/SET_CURRENT_STATE';
+const SET_SELECTED_IDS = 'admin/SET_SELECTED_IDS';
+const TOGGLE_MODAL = 'admin/TOGGLE_MODAL';
 
 const initialState = {
   currentState: 0,
@@ -45,4 +45,3 @@ export const setSelectedIds = (selectedIds) => ({
 export const toggleModal = () => ({
   type: TOGGLE_MODAL,
 });
-

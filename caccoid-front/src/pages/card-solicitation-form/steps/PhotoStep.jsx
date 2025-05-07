@@ -1,9 +1,13 @@
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from 'react-hook-form';
 import uploadIcon from '../../../assets/upload-icon.svg';
 import './styles.css';
 
 export const PhotoStep = () => {
-  const { control, formState: { errors }, watch } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+    watch,
+  } = useFormContext();
   const formData = watch();
 
   return (
@@ -12,7 +16,7 @@ export const PhotoStep = () => {
       <div className="form-grid-photo-input">
         <div className="input-file">
           <div className="upload-icon-container">
-            <img src={uploadIcon} className="upload-icon"/>
+            <img src={uploadIcon} className="upload-icon" />
           </div>
           <Controller
             name="studentPhoto"
@@ -26,18 +30,20 @@ export const PhotoStep = () => {
                   onChange={(e) => field.onChange(e.target.files)}
                   key={formData.studentPhoto?.[0]?.name}
                 />
-                {formData.studentPhoto?.[0]?.name ? (   
+                {formData.studentPhoto?.[0]?.name ? (
                   <p>Arquivo selecionado: {formData.studentPhoto[0].name}</p>
-                ) :
-                <p>Faça o upload do arquivo desejado</p>
-                }
+                ) : (
+                  <p>Faça o upload do arquivo desejado</p>
+                )}
                 {errors.studentPhoto && (
-                  <span className="error-message">{errors.studentPhoto.message}</span>
+                  <span className="error-message">
+                    {errors.studentPhoto.message}
+                  </span>
                 )}
               </>
             )}
           />
-        </div> 
+        </div>
       </div>
     </div>
   );

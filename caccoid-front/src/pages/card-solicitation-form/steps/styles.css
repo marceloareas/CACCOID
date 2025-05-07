@@ -1,21 +1,21 @@
 .checkbox-group {
-    display: block;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
-  
+
 .checkbox-group > p {
-    color: black;
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin-right: 1rem;
+  color: black;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-right: 1rem;
 }
-  
-input[type="checkbox"] {
-    width: 2.2rem;
-    height: 2.2rem;
+
+input[type='checkbox'] {
+  width: 2.2rem;
+  height: 2.2rem;
 }
 
 select {
@@ -23,15 +23,16 @@ select {
   font-size: 1.5rem;
   color: black;
   background-color: white;
-  border: 2px solid #D9D9D9;
+  border: 2px solid #d9d9d9;
   border-radius: 10px;
   width: 30vw;
   height: 3.5rem;
   padding-left: 0.8rem;
 }
 
-select:hover, select:hover {
-  border: 2px solid #00aaff; 
+select:hover,
+select:hover {
+  border: 2px solid #00aaff;
   outline: none;
 }
 
@@ -46,7 +47,7 @@ select:hover, select:hover {
   color: black;
   opacity: 0.5;
   background-color: white;
-  border: 2px solid #D9D9D9;
+  border: 2px solid #d9d9d9;
   border-radius: 10px;
   width: 35vw;
   height: 3.5rem;
@@ -68,7 +69,7 @@ select:hover, select:hover {
   font-family: 'Roboto Mono', monospace;
   font-weight: bold;
   font-size: 1rem;
-  justify-content: center;  
+  justify-content: center;
   align-items: center;
 }
 
@@ -81,11 +82,11 @@ select:hover, select:hover {
 }
 
 .photo-input {
-    opacity: 0;
-    inset: 0;
-    position: absolute;
-    height: 100%;
-    width: 100%;
+  opacity: 0;
+  inset: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .form-grid-photo-input {

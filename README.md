@@ -1,6 +1,6 @@
 # 🎓 CaccoID — Sistema de Carteirinhas do CACCO
 
-O **CaccoID** é um sistema moderno e gratuito para emissão de carteirinhas estudantis digitais dos alunos do curso de **Bacharelado em Ciência da Computação (BCC)** do Centro Federal de Educação Tecnológica Celso Suckow da Fonseca (CEFET-RJ). 
+O **CaccoID** é um sistema moderno e gratuito para emissão de carteirinhas estudantis digitais dos alunos do curso de **Bacharelado em Ciência da Computação (BCC)** do Centro Federal de Educação Tecnológica Celso Suckow da Fonseca (CEFET-RJ).
 
 Desenvolvido para o **CACCO** (Centro Acadêmico do BCC), o CaccoID surge como uma alternativa ao sistema atual, trazendo mais **segurança, autonomia, automação** e foco nas necessidades reais dos estudantes.
 
@@ -77,4 +77,3 @@ O CaccoID está sendo desenvolvido com tecnologias modernas e pensado para escal
 ## 💬 Dúvidas ou sugestões?
 
 Entre em contato com a equipe do CACCO — estamos abertos a ideias, críticas construtivas e apoio!
-
