@@ -6,7 +6,6 @@ import MicrosoftLogo from '../assets/microsoft-logo.svg';
 const LoginLink = styled(Link)`
   text-decoration: underline;
   color: var(--medium-blue);
-  font-weight: bold;
 
   &:hover {
     color: var(--light-grey);
@@ -88,8 +87,8 @@ export default function MicrosoftAuth() {
       <InnerContainer>
         <p>Olá, Calouro! Ainda não possui e-mail institucional?</p>
         <p>
-          <LoginLink to="/login">Crie uma conta ou faça login</LoginLink> com
-          seu e-mail pessoal.
+          <LoginLink to="/email-auth">Crie uma conta ou faça login</LoginLink>{' '}
+          com seu e-mail pessoal.
         </p>
       </InnerContainer>
     </OuterContainer>
