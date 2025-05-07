@@ -43,7 +43,7 @@ const CardSolicitationForm = ({
       identityFront: undefined,
       identityBack: undefined,
       pickupAtCampus: false,
-      pickupAddress: "",
+      pickupLocation: "",
       studentPhoto: undefined,
       paymentProof: undefined,
       ...formData

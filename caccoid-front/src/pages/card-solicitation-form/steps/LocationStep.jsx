@@ -6,6 +6,11 @@ export const LocationStep = () => {
   const { control, watch, setValue } = useFormContext();
   const pickupAtCampus = watch("pickupAtCampus");
 
+  const pickupOptions = [
+    { value: '', label: 'Selecione um local de retirada' },
+    { value: 'Sala do DCE', label: 'Cefet-RJ - Campus Maracanã' }
+  ];
+
   useEffect(() => {
     setValue("pickupAtCampus", pickupAtCampus || false);
   }, [pickupAtCampus, setValue]);
@@ -38,14 +43,21 @@ export const LocationStep = () => {
             <div className="form-group">
               <p className="form-input-label">Local de retirada</p>
               <Controller
-                name="pickupAddress"
+                name="pickupLocation"
                 control={control}
+                defaultValue=""
                 render={({ field }) => (
-                  <select
-                    placeholder="Escolha o local de retirada"
-                    
-                    {...field}
-                  />
+                  <>
+                    <select 
+                      {...field}
+                    >
+                      {pickupOptions.map(option => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </>
                 )}
               />
             </div>

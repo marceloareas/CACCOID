@@ -41,21 +41,12 @@ const reducer = (state = initialState, action = {}) => {
     case UPDATE_FORM_DATA:
       const newData = { ...action.payload };
 
-      if (newData.enrollmentProof) {
-        newData.enrollmentProof = serializeFileList(newData.enrollmentProof);
-      }
-      if (newData.identityFront) {
-        newData.identityFront = serializeFileList(newData.identityFront);
-      }
-      if (newData.identityBack) {
-        newData.identityBack = serializeFileList(newData.identityBack);
-      }
-      if (newData.studentPhoto) {
-        newData.studentPhoto = serializeFileList(newData.studentPhoto);
-      }
-      if (newData.paymentProof) {
-        newData.paymentProof = serializeFileList(newData.paymentProof);
-      }
+      const fileFields = ['enrollmentProof', 'identityFront', 'identityBack', 'studentPhoto', 'paymentProof'];
+      fileFields.forEach(field => {
+        if (newData[field] instanceof FileList) {
+          newData[field] = serializeFileList(newData[field]);
+        }
+      });
 
       return {
         ...state,
