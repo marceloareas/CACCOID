@@ -20,7 +20,7 @@ const GlobalStyles = createGlobalStyle`
     --font-accent: 'Roboto Mono', monospace;
     --font-regular: 'Roboto Condensed', sans-serif;
 
-    --sm: 576px;
+    --sm: 480px;
     --md: 768px;
     --lg: 1024px;
 }
@@ -35,17 +35,19 @@ body {
     min-width: 320px;
     min-height: 100vh;
     font-family: var(--font-regular);
-    background-color: var(--white);
+    background-color: var(--off-white);
     color: var(--black);
 }
 
 h1, h2 {
     font-family: var(--font-title);
     color: var(--dark-blue);
+    font-weight: 400;
 }
 
 h3, h4, h5, h6 {
     font-family: var(--font-accent);
+    font-weight: 400;
 }
 
 a {
@@ -63,9 +65,6 @@ button {
     body {
         font-size: 15px;
     }
-    .some-container {
-        width: 90%;
-    }
 }
 
 @media (max-width: var(--md)) {
@@ -76,10 +75,6 @@ button {
     h1, h2 {
     font-size: 1.8rem;
     }
-
-    .some-container {
-    width: 100%;
-    }
 }
 
 @media (max-width: var(--sm)) {
@@ -89,10 +84,6 @@ button {
 
     h1, h2 {
     font-size: 1.5rem;
-    }
-
-    .some-container {
-    padding: 10px;
     }
 }
 `;

@@ -6,7 +6,7 @@ import CardSolicitationForm from './pages/card-solicitation-form/CardSolicitatio
 import EmailAuth from './pages/EmailAuth';
 import MicrosoftAuth from './pages/MicrosoftAuth';
 import Navbar from './components/Navbar';
-import Home from './pages/Home'; // novo import
+import Home from './pages/Home';
 
 function App() {
   return (
