@@ -56,32 +56,6 @@ button {
     font-family: inherit;
     cursor: pointer;
 }
-
-@media (max-width: var(--lg)) {
-    body {
-        font-size: 15px;
-    }
-}
-
-@media (max-width: var(--md)) {
-    body {
-    font-size: 14px;
-    }
-
-    h1, h2 {
-    font-size: 1.8rem;
-    }
-}
-
-@media (max-width: var(--sm)) {
-    body {
-    font-size: 13px;
-    }
-
-    h1, h2 {
-    font-size: 1.5rem;
-    }
-}
 `;
 
 export default GlobalStyles;
