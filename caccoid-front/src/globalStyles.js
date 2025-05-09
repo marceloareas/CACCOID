@@ -19,10 +19,6 @@ const GlobalStyles = createGlobalStyle`
     --font-title: 'Bebas Neue', sans-serif;
     --font-accent: 'Roboto Mono', monospace;
     --font-regular: 'Roboto Condensed', sans-serif;
-
-    --sm: 480px;
-    --md: 768px;
-    --lg: 1024px;
 }
 
 * {

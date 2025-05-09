@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import MicrosoftLogo from '../assets/microsoft-logo.svg';
@@ -41,12 +40,10 @@ export default function MicrosoftAuth() {
         </StyledDiv>
       </ActionButton>
       <Container color="var(--off-white)">
+        <StyledH3>Olá, Calouro! Ainda não possui e-mail institucional?</StyledH3>
         <StyledH3>
-          Olá, Calouro! Ainda não possui e-mail institucional?
-        </StyledH3>
-        <StyledH3>
-          <StyledLink to="/email-auth">Crie uma conta ou faça login</StyledLink>{' '}
-          com seu e-mail pessoal.
+          <StyledLink to="/email-auth">Crie uma conta ou faça login</StyledLink> com seu e-mail
+          pessoal.
         </StyledH3>
       </Container>
     </Container>

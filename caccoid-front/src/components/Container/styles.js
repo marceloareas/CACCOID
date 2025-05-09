@@ -2,22 +2,25 @@ import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
   padding: 40px;
+  margin-top: 20px;
   background-color: ${(props) => props.color || 'var(--white)'};
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 5px;
-  margin: 20px;
+  width: 40vw;
 
-  @media (max-width: var(--lg)) {
-    width: 10vw;
+  > div {
+    width: 90%;
   }
-  @media (max-width: var(--md)) {
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) and (min-width: ${({ theme }) =>
+    theme.breakpoints.sm}) {
+    width: 70vw;
+  }
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     width: 90vw;
-  }
-  @media (max-width: var(--sm)) {
-    padding: 30px 15px;
   }
 `;
 
