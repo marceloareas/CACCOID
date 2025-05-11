@@ -6,25 +6,29 @@ import CardSolicitationForm from './pages/card-solicitation-form/CardSolicitatio
 import EmailAuth from './pages/EmailAuth';
 import MicrosoftAuth from './pages/MicrosoftAuth';
 import Navbar from './components/Navbar';
-import Home from './pages/Home'; // novo import
+import Home from './pages/Home';
+import { ThemeProvider } from 'styled-components';
+import theme from './theme';
 
 function App() {
   return (
     <>
-      <GlobalStyles />
-      <ReduxProvider store={store}>
-        <BrowserRouter>
-          <Navbar />
-          <div style={{ paddingTop: '90px' }}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/form" element={<CardSolicitationForm />} />
-              <Route path="/microsoft-auth" element={<MicrosoftAuth />} />
-              <Route path="/email-auth" element={<EmailAuth />} />
-            </Routes>
-          </div>
-        </BrowserRouter>
-      </ReduxProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <ReduxProvider store={store}>
+          <BrowserRouter>
+            <Navbar />
+            <div style={{ paddingTop: '90px' }}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/form" element={<CardSolicitationForm />} />
+                <Route path="/microsoft-auth" element={<MicrosoftAuth />} />
+                <Route path="/email-auth" element={<EmailAuth />} />
+              </Routes>
+            </div>
+          </BrowserRouter>
+        </ReduxProvider>
+      </ThemeProvider>
     </>
   );
 }
