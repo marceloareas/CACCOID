@@ -10,8 +10,17 @@
         <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
 
+    <appender name="Logtail" class="com.logtail.logback.LogtailAppender">
+        <appName>CaccoID</appName>
+        <sourceToken>Go4vN38kxbwxPHUiTd8cWKWp</sourceToken>
+        <ingestUrl>https://s1313888.eu-nbg-2.betterstackdata.com</ingestUrl >
+        <mdcFields>requestId,requestTime</mdcFields>
+        <mdcTypes>string,int</mdcTypes>
+    </appender>
+
     <logger name="br.com.cefet.caccoId" level="INFO" additivity="false">
         <appender-ref ref="JSON_FILE"/>
+        <appender-ref ref="Logtail"/>
     </logger>
 
     <logger name="br.com.cefet.caccoId.CaccoIdApplication" level="OFF" additivity="false"/>

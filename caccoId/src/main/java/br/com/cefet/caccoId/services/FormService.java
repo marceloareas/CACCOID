@@ -3,17 +3,18 @@ package br.com.cefet.caccoId.services;
 import br.com.cefet.caccoId.dtos.FormRequestDTO;
 import br.com.cefet.caccoId.mappers.SolicitationMapper;
 import br.com.cefet.caccoId.mappers.StudentMapper;
-import br.com.cefet.caccoId.models.Solicitation;
+import br.com.cefet.caccoId.models.User;
 import br.com.cefet.caccoId.repositories.SolicitationRepository;
 import br.com.cefet.caccoId.repositories.StudentRepository;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.io.IOException;
 
 @Service
 public class FormService {
@@ -32,8 +33,11 @@ public class FormService {
         this.solicitationMapper = solicitationMapper;
         this.solicitationRepository = solicitationRepository;
     }
+
     public void registerStudent(FormRequestDTO formRequestDTO)
             throws IllegalArgumentException, DataIntegrityViolationException{
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User loggedUser = (User) auth.getPrincipal();
         MDC.put("cpf", formRequestDTO.getStudent().getCpf());
 
         try {
@@ -46,31 +50,26 @@ public class FormService {
                 throw new IllegalArgumentException("Já existe um estudante cadastrado com este e-mail.");
             }
 
-            var studentSaved = studentRepository.save(student);
-            log.info("Estudante registrado com sucesso. ID: {}", studentSaved.getId());
-
             try {
-                var solicitation = solicitationMapper.toEntity(formRequestDTO.getSolicitation());
-                solicitation.setStudent(studentSaved);
-                var filledSolicitation = setInitialSolicitationValues(solicitation);
-                var solicitationSaved = solicitationRepository.save(filledSolicitation);
-                log.info("Solicitação do estudante {} registrada com sucesso. ID: {}", studentSaved.getId(), solicitationSaved.getId());
-            }catch (Exception ex){
-                log.error("Falha ao salvar solicitação: {}", ex.getMessage());
+                student.setUser(loggedUser);
+                var studentSaved = studentRepository.save(student);
+                log.info("Estudante registrado com sucesso. ID: {}", studentSaved.getId());
+
+                try {
+                    var solicitation = solicitationMapper.toEntity(formRequestDTO.getSolicitation());
+                    solicitation.setStudent(studentSaved);
+                    var solicitationSaved = solicitationRepository.save(solicitation);
+                    log.info("Solicitação do estudante {} registrada com sucesso. ID: {}", studentSaved.getId(), solicitationSaved.getId());
+                }catch (Exception ex){
+                    log.error("Falha ao salvar solicitação: {}", ex.getMessage());
+                }
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+                throw new DataIntegrityViolationException("Esse usuário já tem uma solicitação ativa.");
             }
         }finally {
             MDC.clear();
         }
-    }
-
-    public Solicitation setInitialSolicitationValues(Solicitation solicitation){
-        solicitation.setNeedsCorrection(false);
-        solicitation.setCorrected(false);
-        solicitation.setPaid(false);
-        solicitation.setAdminNote("");
-        solicitation.setStatus(0);
-        ZonedDateTime zonedNow = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"));
-        solicitation.setRequestDate(zonedNow.toLocalDateTime());
-        return solicitation;
     }
 }

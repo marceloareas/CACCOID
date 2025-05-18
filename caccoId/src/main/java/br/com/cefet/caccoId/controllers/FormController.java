@@ -26,7 +26,7 @@ public class FormController {
             var response = new ApiResponseDTO<>(true, "Estudante registrado com sucesso!", null);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (IllegalArgumentException | DataIntegrityViolationException e) {
-            var response = new ApiResponseDTO<>(true, e.getMessage(),null);
+            var response = new ApiResponseDTO<>(false, e.getMessage(),null);
             return ResponseEntity.badRequest().body(response);
         }
     }
