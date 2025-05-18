@@ -4,7 +4,6 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useSchema } from '../../hooks/useSchema';
-import FormProgressBar from '../../components/form/form-progress-bar/FormProgressBar';
 import { CourseStep } from './steps/CourseStep';
 import { PersonalStep } from './steps/PersonalStep';
 import { DocumentsStep } from './steps/DocumentsStep';
@@ -16,6 +15,7 @@ import arrowIcon from '../../assets/arrow-icon.svg';
 import { setCurrentPage, updateFormData } from '../../ducks/form';
 
 import './styles.css';
+import FormProgressBar from '../../components/FormProgressBar';
 
 const CardSolicitationForm = ({
   currentPage,

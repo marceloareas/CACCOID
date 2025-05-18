@@ -4,19 +4,10 @@ import documentIcon from '../assets/document-icon.svg';
 import imageIcon from '../assets/image-icon.svg';
 import locationIcon from '../assets/location-icon.svg';
 import creditCardIcon from '../assets/credit-card-icon.svg';
+import { serializeFileList } from '../utils/serializeFileList';
 
 const SET_CURRENT_PAGE = 'form/SET_CURRENT_PAGE';
 const UPDATE_FORM_DATA = 'form/UPDATE_FORM_DATA';
-
-const serializeFileList = (fileList) => {
-  if (!fileList || fileList.length === 0) return null;
-  return Array.from(fileList).map((file) => ({
-    name: file.name,
-    size: file.size,
-    type: file.type,
-    lastModified: file.lastModified,
-  }));
-};
 
 const initialState = {
   currentPage: 0,
