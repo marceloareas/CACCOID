@@ -3,7 +3,6 @@ package br.com.cefet.caccoId.controllers;
 
 import br.com.cefet.caccoId.dtos.ApiResponseDTO;
 import br.com.cefet.caccoId.dtos.FormRequestDTO;
-import br.com.cefet.caccoId.dtos.StudentRequestDTO;
 import br.com.cefet.caccoId.services.FormService;
 import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
