@@ -10,11 +10,26 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/bebas-neue": "^5.2.5",
+    "@fontsource/roboto-condensed": "^5.2.5",
+    "@fontsource/roboto-mono": "^5.2.5",
+    "@hookform/resolvers": "^5.0.1",
+    "@reduxjs/toolkit": "^2.7.0",
+    "axios": "^1.9.0",
+    "loadash": "^1.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-datepicker": "^8.3.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.56.1",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.5.3",
+    "redux": "^5.0.1",
+    "styled-components": "^6.1.17",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@hookform/devtools": "^4.4.0",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
