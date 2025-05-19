@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
+import UserHome from './pages/UserHome';
 
 function App() {
   return (
@@ -18,12 +19,13 @@ function App() {
         <ReduxProvider store={store}>
           <BrowserRouter>
             <Navbar />
-            <div style={{ paddingTop: '90px' }}>
+            <div style={{ paddingTop: '90px', minHeight: '100vh' }}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/form" element={<CardSolicitationForm />} />
                 <Route path="/microsoft-auth" element={<MicrosoftAuth />} />
                 <Route path="/email-auth" element={<EmailAuth />} />
+                <Route path="/home" element={<UserHome />} />
               </Routes>
             </div>
           </BrowserRouter>
