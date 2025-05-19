@@ -1,6 +1,8 @@
-import { FormGenericStep } from "../../../components/FormGenericStep";
-
-
+import { FormGenericStep } from '../../../components/FormGenericStep';
+// import {
+//   GenericInput,
+//   GenericSelect,
+// } from '../../../components/FormGenericStep/styles';
 
 export const CourseStep = () => {
   const educationLevels = [
@@ -25,8 +27,8 @@ export const CourseStep = () => {
       {
         name: 'educationLevel',
         label: 'Nível de ensino',
-        type: 'select',
-        options: educationLevels,
+        inputType: 'select',
+        inputOptions: educationLevels,
       },
       {
         name: 'registration',
@@ -37,23 +39,19 @@ export const CourseStep = () => {
       {
         name: 'courseName',
         label: 'Curso',
-        type: 'select',
-        options: courses,
+        inputType: 'select',
+        inputOptions: courses,
       },
       {
         name: 'institutionName',
         label: 'Instituição de ensino',
-        type: 'select',
-        options: institutions,
+        inputType: 'select',
+        inputOptions: institutions,
       },
     ],
     column2: [],
     uploadField: [],
   };
 
-  return (
-    <FormGenericStep
-      fields={fields}
-    />
-  );
+  return <FormGenericStep fields={fields} />;
 };
