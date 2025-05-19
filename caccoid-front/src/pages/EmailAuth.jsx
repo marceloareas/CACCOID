@@ -1,74 +1,157 @@
-import LoginComponent from '../components/EmailAuth/LoginComponent';
-import RegisterComponent from '../components/EmailAuth/RegisterComponent';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-export const MicrosoftBanner = styled.div`
-  background-color: #003366;
-  color: white;
-  padding: 1.5rem 2rem;
-  margin: 2rem auto;
-  width: 90%;
-  max-width: 800px;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  font-size: 1rem;
-  font-weight: bold;
-  line-height: 1.4;
-  z-index: 1;
+import Container from '../components/Container';
+import UnderlinedTitle from '../components/UnderlinedTitle';
+import { ActionButton } from '../components/ActionButton';
+import MicrosoftLogo from '../assets/microsoft-logo.svg';
+import LabeledInput from '../components/LabeledInput';
+import { ErrorMessage } from '../components/LabeledInput/styles';
+
+const ContainerWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-  a {
-    background-color: white;
-    color: #000;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 2px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    &:hover {
-      background-color: #f1f1f1;
-    }
-
-    img {
-      height: 20px;
-    }
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    flex-direction: column;
   }
 `;
 
-const LoginLink = styled(Link)`
-  text-decoration: underline;
-  color: var(--medium-blue);
-
-  &:hover {
-    color: var(--light-grey);
-  }
+const StyledH3 = styled.h3`
+  color: var(--white);
+  margin: 1rem;
+  flex: 1;
 `;
 
-export default function Login() {
+const MicrosoftIcon = styled.img`
+  height: 20px;
+  width: 30px;
+  scale: 1.4;
+  margin-right: 10px;
+  align-self: center;
+`;
+
+const StyledDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin: 1rem;
+  flex: 0;
+  white-space: nowrap;
+`;
+
+const BlueContainerDiv = styled.div`
+  justify-content: center;
+  display: flex;
+`;
+
+export default function EmailAuth() {
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [setPasswordError] = useState('');
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    // Chamar a API depois
+  };
+
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault();
+    if (registerPassword !== confirmPassword) {
+      setPasswordError('As senhas não coincidem');
+      return;
+    } else {
+      setPasswordError('');
+    }
+    // Chamar a API depois
+  };
+
   return (
-    <div>
-      {/*
-      <MicrosoftBanner>
-        <span>
-          Tenha sua carteirinha de estudante com praticidade! <br />
-          <strong>Acesse com seu e-mail institucional do CEFET-RJ:</strong>
-        </span>
-        <LoginLink to="/microsoft-auth">
-          <img src="/microsoft-icon.png" alt="Microsoft" />
-          FAÇA LOGIN COM CONTA MICROSOFT
-        </LoginLink>
-      </MicrosoftBanner>
-  */}
-      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-        <LoginComponent />
-        <RegisterComponent />
-      </div>
-    </div>
+    <>
+      <BlueContainerDiv>
+        <Container variant="blueRow">
+          <StyledH3>
+            Tenha sua carteirinha de estudante com praticidade!
+            <br />
+            <strong>Acesse com seu e-mail institucional do CEFET-RJ:</strong>
+          </StyledH3>
+          <StyledDiv>
+            <ActionButton variant="quaternary">
+              <MicrosoftIcon src={MicrosoftLogo} />
+              FAÇA LOGIN COM CONTA MICROSOFT
+            </ActionButton>
+          </StyledDiv>
+        </Container>
+      </BlueContainerDiv>
+
+      <ContainerWrapper>
+        <Container>
+          <UnderlinedTitle color="var(--light-grey)">
+            Faça login com seu e-mail pessoal
+          </UnderlinedTitle>
+          <form onSubmit={handleLoginSubmit}>
+            <LabeledInput
+              title="E-mail"
+              placeholder="Digite seu e-mail"
+              type="email"
+              value={loginEmail}
+              onChange={(val) => setLoginEmail(val)}
+            />
+            <LabeledInput
+              title="Senha"
+              placeholder="Digite sua senha"
+              type="password"
+              value={loginPassword}
+              onChange={(val) => setLoginPassword(val)}
+            />
+            <ActionButton variant="tertiary" type="submit">
+              LOGIN
+            </ActionButton>
+          </form>
+        </Container>
+
+        <Container>
+          <UnderlinedTitle color="var(--light-grey)">
+            Crie uma conta com seu e-mail pessoal
+          </UnderlinedTitle>
+          <form onSubmit={handleRegisterSubmit}>
+            <LabeledInput
+              title="E-mail"
+              placeholder="Digite seu e-mail"
+              type="email"
+              value={registerEmail}
+              onChange={(val) => setRegisterEmail(val)}
+            />
+            <LabeledInput
+              title="Senha"
+              placeholder="Digite sua senha"
+              type="password"
+              value={registerPassword}
+              onChange={(val) => setRegisterPassword(val)}
+            />
+            <LabeledInput
+              title="Confirme sua senha"
+              placeholder="Confirme sua senha"
+              type="password"
+              value={confirmPassword}
+              onChange={(val) => setConfirmPassword(val)}
+              confirmPassword
+              password={registerPassword}
+            />
+            <ActionButton variant="tertiary" type="submit">
+              REGISTRE-SE
+            </ActionButton>
+          </form>
+        </Container>
+      </ContainerWrapper>
+    </>
   );
 }

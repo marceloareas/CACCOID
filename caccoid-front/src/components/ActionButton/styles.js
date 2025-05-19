@@ -9,7 +9,7 @@ const getColor = (variant) => {
     case 'tertiary':
       return 'var(--dark-grey)';
     case 'quaternary':
-      return 'var(--medium-grey)';
+      return 'var(--light-grey)';
     case 'danger':
       return 'var(--dark-red)';
     default:
