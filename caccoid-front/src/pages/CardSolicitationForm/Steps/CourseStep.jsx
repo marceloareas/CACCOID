@@ -1,6 +1,8 @@
 import { FormGenericStep } from "../../../components/FormGenericStep";
 
-export const CourseStep = ({ formData, updateFormData }) => {
+
+
+export const CourseStep = () => {
   const educationLevels = [
     { value: '', label: 'Selecione o nível de ensino' },
     { value: 'graduacao', label: 'Graduação' },
@@ -51,8 +53,6 @@ export const CourseStep = ({ formData, updateFormData }) => {
 
   return (
     <FormGenericStep
-      formData={formData}
-      updateFormData={updateFormData}
       fields={fields}
     />
   );

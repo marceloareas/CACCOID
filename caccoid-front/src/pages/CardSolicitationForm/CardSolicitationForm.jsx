@@ -1,33 +1,30 @@
 import { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { FormProvider, useForm } from 'react-hook-form';
+import { connect, useSelector } from 'react-redux';
+import { FormProvider, useFormContext } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useSchema } from '../../hooks/useSchema';
-import { CourseStep } from './steps/CourseStep';
-import { PersonalStep } from './steps/PersonalStep';
-import { DocumentsStep } from './steps/DocumentsStep';
-import { LocationStep } from './steps/LocationStep';
-import { PhotoStep } from './steps/PhotoStep';
-import { PaymentStep } from './steps/PaymentStep';
+import { CourseStep } from './Steps/CourseStep';
+import { PersonalStep } from './Steps/PersonalStep';
+import { DocumentsStep } from './Steps/DocumentsStep';
+import { LocationStep } from './Steps/LocationStep';
+import { PhotoStep } from './Steps/PhotoStep';
+import { PaymentStep } from './Steps/PaymentStep';
 
 import arrowIcon from '../../assets/arrow-icon.svg';
-import { setCurrentPage, updateFormData } from '../../ducks/form';
+import { setCurrentPage } from '../../ducks/form';
 
 import './styles.css';
 import FormProgressBar from '../../components/FormProgressBar';
 
-const CardSolicitationForm = ({
-  currentPage,
-  steps,
-  formData,
-  setCurrentPage,
-  updateFormData,
-}) => {
+export const CardSolicitationForm = () => {
   const { schema } = useSchema();
+
+  const { currentPage, steps } = useSelector((store) => store.form)
+
   const [isValidating, setIsValidating] = useState(false);
 
-  const methods = useForm({
+  const methods = useFormContext({
     defaultValues: {
       educationLevel: '',
       registration: '',
@@ -45,42 +42,11 @@ const CardSolicitationForm = ({
       pickupAtCampus: false,
       pickupLocation: '',
       studentPhoto: undefined,
-      paymentProof: undefined,
-      ...formData,
+      paymentProof: undefined
     },
     resolver: yupResolver(schema),
     mode: 'onTouched',
   });
-
-  const {
-    handleSubmit,
-    trigger,
-    watch,
-    formState: { errors },
-  } = methods;
-
-  useEffect(() => {
-    const subscription = watch((values) => {
-      const valuesToUpdate = { ...values };
-
-      // Remove os FileList originais antes de enviar para o Redux
-      const fileFields = [
-        'enrollmentProof',
-        'identityFront',
-        'identityBack',
-        'studentPhoto',
-        'paymentProof',
-      ];
-      fileFields.forEach((field) => {
-        if (valuesToUpdate[field] instanceof FileList) {
-          valuesToUpdate[field] = undefined; // O reducer vai serializar
-        }
-      });
-
-      updateFormData(valuesToUpdate);
-    });
-    return () => subscription.unsubscribe();
-  }, [watch, updateFormData]);
 
   const stepFieldsMap = {
     0: ['educationLevel', 'registration', 'courseName', 'institutionName'],
@@ -93,7 +59,7 @@ const CardSolicitationForm = ({
 
   const isStepValid = async () => {
     const fields = stepFieldsMap[currentPage] || [];
-    return await trigger(fields);
+    return await methods.trigger(fields);
   };
 
   const nextStep = async () => {
@@ -115,20 +81,19 @@ const CardSolicitationForm = ({
   };
 
   useEffect(() => {
-    const firstError = Object.keys(errors)[0];
+    const firstError = Object.keys(methods?.formState?.errors)[0];
     if (firstError) {
       const element = document.querySelector(`[name="${firstError}"]`);
       element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-  }, [errors]);
+  }, [methods?.formState?.errors]);
 
   const renderStepComponent = () => {
-    const stepProps = { formData, updateFormData };
     switch (currentPage) {
       case 0:
-        return <CourseStep {...stepProps} />;
+        return <CourseStep />;
       case 1:
-        return <PersonalStep {...stepProps} />;
+        return <PersonalStep />;
       case 2:
         return <DocumentsStep />;
       case 3:
@@ -138,13 +103,13 @@ const CardSolicitationForm = ({
       case 5:
         return <PaymentStep />;
       default:
-        return <CourseStep {...stepProps} />;
+        return <CourseStep />;
     }
   };
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={methods?.handleSubmit(onSubmit)}>
         <div className="form-windown">
           <FormProgressBar />
           {renderStepComponent()}
@@ -181,7 +146,7 @@ const CardSolicitationForm = ({
               <button
                 type="submit"
                 className="submit-button"
-                disabled={Object.keys(errors).length > 0 || isValidating}
+                disabled={Object.keys(methods?.formState?.errors).length > 0 || isValidating}
               >
                 {isValidating ? 'Enviando...' : 'Enviar'}
               </button>
@@ -193,18 +158,17 @@ const CardSolicitationForm = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  currentPage: state.form.currentPage,
-  steps: state.form.steps,
-  formData: state.form.formData,
-});
+// const mapStateToProps = (state) => ({
+//   currentPage: state.form.currentPage,
+//   steps: state.form.steps,
+//   formData: state.form.formData,
+// });
 
-const mapDispatchToProps = {
-  setCurrentPage,
-  updateFormData,
-};
+// const mapDispatchToProps = {
+//   setCurrentPage
+// };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CardSolicitationForm);
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps,
+// )(CardSolicitationForm);

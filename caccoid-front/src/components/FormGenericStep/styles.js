@@ -1,55 +1,57 @@
-.form-step {
+import styled from 'styled-components';
+
+
+
+export const FormStep = styled.div`
   width: 100%;
   margin-bottom: 3rem;
   text-align: start;
   display: grid;
   grid-template-rows: 1fr;
-}
+`
 
-h2 {
+export const Title = styled.h2`
   margin-bottom: 0;
   color: black;
   font-family: 'Bebas Neue', sans-serif;
   font-size: 2.25rem;
-}
+`
 
-.form-grid {
+export const FormGrid = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2.5rem;
-}
+`
 
-.form-first-column,
-.form-second-column {
+export const FormColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-}
+`
 
-.form-group {
+export const FormGroup = styled.div`
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   box-sizing: border-box;
-}
+`
 
-.form-input-label {
+export const FormInputLabel = styled.p`
   color: black;
   margin-bottom: 0.25rem;
   font-family: 'Roboto Mono', monospace;
   font-weight: bold;
   font-size: 1.75rem;
-}
 
-p > span {
-  color: #f04036;
-}
+  & > span {
+    color: #f04036;
+  }
+`
 
-input,
-select {
+export const GenericInput = styled.input`
   font-family: 'Roboto Mono', monospace;
   font-size: 1.5rem;
   color: black;
@@ -59,26 +61,68 @@ select {
   width: 30vw;
   height: 3.5rem;
   padding-left: 0.8rem;
-}
 
-input:focus,
-input:hover,
-select:hover,
-select:hover {
-  border: 2px solid #00aaff;
-  outline: none;
-}
+  &:focus, hover {
+    border: 2px solid #00aaff;
+    outline: none;
+  } 
+    
+  &::placeholder {
+    color: #000000;
+    opacity: 0.3;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.5rem;
+    padding-left: 0.8rem;
+  }
+`
 
-input::placeholder {
-  color: #000000;
-  opacity: 0.3;
+export const GenericSelect = styled.select`
   font-family: 'Roboto Mono', monospace;
   font-size: 1.5rem;
+  color: black;
+  background-color: white;
+  border: 2px solid #d9d9d9;
+  border-radius: 10px;
+  width: 30vw;
+  height: 3.5rem;
   padding-left: 0.8rem;
-}
 
-.error-message {
+  &:focus, hover {
+    border: 2px solid #00aaff;
+    outline: none;
+  }     
+`
+
+export const ErrorMessage = styled.span`
   color: #f04036;
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.2rem;
-}
+`
+
+
+export const DatePickerContainer = styled.div`
+  .form-input {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.5rem;
+    color: black;
+    background-color: white;
+    border: 2px solid #d9d9d9;
+    border-radius: 10px;
+    width: 30vw;
+    height: 3.5rem;
+    padding-left: 0.8rem;
+
+    &:focus, hover {
+      border: 2px solid #00aaff;
+      outline: none;
+    } 
+    
+    &::placeholder {
+      color: #000000;
+      opacity: 0.3;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 1.5rem;
+      padding-left: 0.8rem;
+    }
+  }
+`
