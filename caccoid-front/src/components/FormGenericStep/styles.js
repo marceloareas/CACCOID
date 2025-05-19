@@ -14,7 +14,8 @@ export const Title = styled.h2`
   margin-bottom: 0;
   color: black;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.25rem;
+  font-weight: 400;
+  font-size: 2.0rem;
 `
 
 export const FormGrid = styled.div`
@@ -44,7 +45,7 @@ export const FormInputLabel = styled.p`
   margin-bottom: 0.25rem;
   font-family: 'Roboto Mono', monospace;
   font-weight: bold;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
 
   & > span {
     color: #f04036;

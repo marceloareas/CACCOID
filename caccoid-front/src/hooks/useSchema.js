@@ -38,9 +38,8 @@ export const useSchema = () => {
         rg: yup
           .string()
           .required('RG é obrigatório')
-          .test('rg-format', 'Formato inválido (00.000.000-0)', (value) => {
-            return /^\d{2}\.\d{3}\.\d{3}-\d{1}$/.test(value);
-          }),
+          .max(20, 'Número máximo de caracteres é 20.'),
+
         birthDate: yup
           .string()
           .required('Data de nascimento é obrigatória')

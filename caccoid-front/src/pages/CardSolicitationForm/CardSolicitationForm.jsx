@@ -14,8 +14,10 @@ import { PaymentStep } from './Steps/PaymentStep';
 import arrowIcon from '../../assets/arrow-icon.svg';
 import { setCurrentPage } from '../../ducks/form';
 
-import './styles.css';
+import * as S from './styles';
+
 import FormProgressBar from '../../components/FormProgressBar';
+import { ActionButton } from '../../components/ActionButton';
 
 export const CardSolicitationForm = () => {
   const { schema } = useSchema();
@@ -72,32 +74,26 @@ export const CardSolicitationForm = () => {
   return (
     <FormProvider {...methods}>
       <DevTool control={methods.control} />
-      <form onSubmit={methods?.handleSubmit(onSubmit)}>
-        <div className="form-windown">
+      <form style={{display:'flex', justifyContent: 'center'}} onSubmit={methods?.handleSubmit(onSubmit)}>
+        <S.FormWindow>
           <FormProgressBar />
           {renderStepComponent()}
 
-          <div
-            className={
-              currentPage === 0
-                ? 'form-navigation-first-page'
-                : 'form-navigation'
-            }
-          >
+          <S.FormNavigationContainer firstPage={currentPage === 0}>
             {currentPage > 0 && (
-              <button
+              <S.FormButton
                 type="button"
-                className="prev-button"
+                prevButton={currentPage > 0}
                 onClick={() => {
                   dispatch(setCurrentPage(currentPage - 1));
                 }}
               >
                 <img src={arrowIcon} alt="Anterior" />
                 Anterior
-              </button>
+              </S.FormButton>
             )}
             {currentPage < steps.length - 1 ? (
-              <button
+              <S.FormButton
                 type="button"
                 onClick={() => {
                   console.log('Form state:', methods.formState.isValid);
@@ -105,21 +101,20 @@ export const CardSolicitationForm = () => {
                     ? dispatch(setCurrentPage(currentPage + 1))
                     : '';
                 }}
-                className="next-button"
               >
+                Próximo
                 <img src={arrowIcon} alt="Próximo" />
-              </button>
+              </S.FormButton>
             ) : (
               <button
                 type="submit"
-                className="submit-button"
                 disabled={!methods?.formState?.isValid}
               >
                 Enviar
               </button>
             )}
-          </div>
-        </div>
+          </S.FormNavigationContainer>
+        </S.FormWindow>
       </form>
     </FormProvider>
   );

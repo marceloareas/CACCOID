@@ -1,6 +1,6 @@
 import { FormGenericStep } from "../../../components/FormGenericStep";
 
-export const PersonalStep = ({ formData, updateFormData }) => {
+export const PersonalStep = () => {
   const fields = {
     title: 'Dados pessoais',
     column1: [
@@ -9,9 +9,23 @@ export const PersonalStep = ({ formData, updateFormData }) => {
         label: 'Nome Completo',
         placeholder: 'Digite seu nome completo',
       },
-      { name: 'rg', label: 'RG', type: 'rg', placeholder: '00.000.000-0' },
-      { name: 'cpf', label: 'CPF', type: 'cpf', placeholder: '000.000.000-00' },
-      { name: 'birthDate', label: 'Data de nascimento', type: 'date' },
+      { 
+        name: 'rg', 
+        label: 'RG', 
+        type: 'rg', 
+        placeholder: '00.000.000-0' 
+      },
+      { 
+        name: 'cpf', 
+        label: 'CPF', 
+        type: 'cpf', 
+        placeholder: '000.000.000-00' 
+      },
+      { 
+        name: 'birthDate', 
+        label: 'Data de nascimento', 
+        type: 'date' 
+      },
     ],
     column2: [
       {
@@ -31,10 +45,6 @@ export const PersonalStep = ({ formData, updateFormData }) => {
   };
 
   return (
-    <FormGenericStep
-      formData={formData}
-      updateFormData={updateFormData}
-      fields={fields}
-    />
+    <FormGenericStep fields={fields}/>
   );
 };

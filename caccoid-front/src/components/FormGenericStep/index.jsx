@@ -48,6 +48,7 @@ export const FormGenericStep = ({ fields }) => {
                     <GenericInput
                       name={item.name}
                       placeholder={item.placeholder}
+                      value={field.value || ''}
                       onChange={(e) => {
                         field.onChange(
                           formatInput({
@@ -73,11 +74,11 @@ export const FormGenericStep = ({ fields }) => {
         {fields.column2.length > 0 && (
           <S.FormColumn>
             {fields.column2.map((item) => (
-              <div className="form-group" key={item.name}>
-                <p className="form-input-label">
+              <S.FormGroup key={item.name}>
+                <S.FormInputLabel>
                   {item.label}
                   <span>*</span>
-                </p>
+                </S.FormInputLabel>
                 <Controller
                   name={item.name}
                   control={control}
@@ -102,20 +103,23 @@ export const FormGenericStep = ({ fields }) => {
                       </S.DatePickerContainer>
                     ) : (
                       <GenericInput
-                        {...field}
                         name={item.name}
                         placeholder={item.placeholder}
-                        {...item}
+                        value={field.value || ''}
                         onChange={(e) => {
                           field.onChange(
-                            formatInput(item.name, e.target.value)
+                            formatInput({
+                              type: item.name,
+                              value: e.target.value,
+                            })
                           );
                         }}
+                        {...item}
                       />
                     );
                   }}
                 />
-              </div>
+              </S.FormGroup>
             ))}
           </S.FormColumn>
         )}
