@@ -1,91 +1,11 @@
-// import { Controller, useFormContext } from "react-hook-form";
-// import { useEffect, useRef } from "react";
-// import { isEqual } from "lodash";
-// import './styles.css';
-
-// export const GenericStep = ({ fields, formData, updateFormData }) => {
-//   const { control, watch, formState: { errors } } = useFormContext();
-//   const previousValues = useRef(formData);
-
-//   const fieldNames = [...fields.column1, ...fields.column2].map(f => f.name);
-//   const watchedValues = watch(fieldNames);
-
-//   useEffect(() => {
-//     if (!isEqual(previousValues.current, watchedValues)) {
-//       previousValues.current = watchedValues;
-//       updateFormData(watchedValues);
-//     }
-//   }, [watchedValues, updateFormData]);
-
-//   return (
-//     <div className="form-step">
-//       <h2>{fields.title}</h2>
-//       <div className="form-grid">
-//         <div className="form-first-column">
-//           {fields.column1.map(({ name, label, placeholder, type = "text" }) => (
-//             <div className="form-group" key={name}>
-//               <p className="form-input-label">{label}<span>*</span></p>
-//               <Controller
-//                 name={name}
-//                 control={control}
-//                 defaultValue={formData[name] || ""}
-//                 render={({ field }) => (
-//                   <>
-//                     <input
-//                       {...field}
-//                       type={type}
-//                       placeholder={placeholder}
-//                       className={`form-input ${errors[name] ? 'error' : ''}`}
-//                     />
-//                     {errors[name] && (
-//                       <span className="error-message">{errors[name].message}</span>
-//                     )}
-//                   </>
-//                 )}
-//               />
-//             </div>
-//           ))}
-//         </div>
-
-//         {fields.column2.length > 0 && (
-//           <div className="form-second-column">
-//             {fields.column2.map(({ name, label, placeholder, type = "text" }) => (
-//               <div className="form-group" key={name}>
-//                 <p className="form-input-label">{label}<span>*</span></p>
-//                 <Controller
-//                   name={name}
-//                   control={control}
-//                   defaultValue={formData[name] || ""}
-//                   render={({ field }) => (
-//                     <>
-//                       <input
-//                         {...field}
-//                         type={type}
-//                         placeholder={placeholder}
-//                         className={`form-input ${errors[name] ? 'error' : ''}`}
-//                       />
-//                       {errors[name] && (
-//                         <span className="error-message">{errors[name].message}</span>
-//                       )}
-//                     </>
-//                   )}
-//                 />
-//               </div>
-//             ))}
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
 import { Controller, useFormContext } from 'react-hook-form';
 import { useEffect, useRef } from 'react';
 import { isEqual } from 'lodash';
-import { InputMask } from '../../utils/inputs-masks/InputMasks';
-import './styles.css';
+import { formatInput } from '../../utils/formatInput';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-export const GenericStep = ({ fields, formData, updateFormData }) => {
+export const FormGenericStep = ({ fields, formData, updateFormData }) => {
   const {
     control,
     watch,
@@ -95,6 +15,9 @@ export const GenericStep = ({ fields, formData, updateFormData }) => {
 
   const fieldNames = [...fields.column1, ...fields.column2].map((f) => f.name);
   const watchedValues = watch(fieldNames);
+
+  const formatDateToString = (date) =>
+    date ? new Date(date).toISOString().split('T')[0] : '';
 
   useEffect(() => {
     if (!isEqual(previousValues.current, watchedValues)) {
@@ -128,8 +51,33 @@ export const GenericStep = ({ fields, formData, updateFormData }) => {
       );
     }
 
-    if (['date', 'phone', 'cpf', 'rg'].includes(type)) {
-      return <InputMask type={type} {...inputProps} />;
+    if (type === 'date') {
+      <DatePicker
+        selected={field.value ? new Date(field.value) : null}
+        onChange={(date) =>
+          field.onChange({ target: { value: formatDateToString(date) } })
+        }
+        dateFormat="dd/MM/yyyy"
+        showYearDropdown
+        dropdownMode="select"
+        yearDropdownItemNumber={100}
+        scrollableYearDropdown
+        className="form-input"
+        placeholderText="DD/MM/AAAA"
+      />;
+    }
+
+    if (['phone', 'cpf', 'rg'].includes(type)) {
+      return (
+        <input
+          type="text"
+          value={field.value}
+          onChange={(e) =>
+            field.onChange(formatInput({ type, value: e.target.value }))
+          }
+          className="form-input"
+        />
+      );
     }
 
     return <input type={type} {...inputProps} />;

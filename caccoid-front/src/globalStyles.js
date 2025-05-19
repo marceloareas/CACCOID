@@ -12,6 +12,7 @@ const GlobalStyles = createGlobalStyle`
     --medium-green: #279666;
     --dark-grey: #383838;
     --light-grey: #6E6E6E;
+    --lightest-grey: #E3E3E2;
     --medium-yellow: #FBE540;
     --white: #FFFFFF;
     --black: #000000;
@@ -22,10 +23,16 @@ const GlobalStyles = createGlobalStyle`
 }
 
 * {
-    box-sizing: border-box;
+    box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
+<<<<<<< HEAD
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
@@ -56,5 +63,14 @@ button {
     cursor: pointer;
 }
 `;
+=======
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: var(--off-white);
+  color: var(--black);
+}`;
+>>>>>>> 373aa3a41ee54cb63dd8b8f109d06db6e65230f7
 
 export default GlobalStyles;

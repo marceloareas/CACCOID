@@ -1,5 +1,5 @@
 import { ActionButton } from '../components/ActionButton';
-import trashIcon from '../assets/trash.svg';
+import trashIcon from '../assets/trash-icon.svg';
 
 export default function Home() {
   return (

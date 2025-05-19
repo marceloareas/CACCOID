@@ -1,9 +1,9 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import { setCurrentPage } from '../../../ducks/form';
+import { setCurrentPage } from '../../ducks/form';
 import { useFormContext } from 'react-hook-form';
-import checkIcon from '../../../assets/check-icon.svg';
-import './styles.css';
+import checkIcon from '../../assets/check-icon.svg';
+import * as S from './styles';
+import React from 'react';
 
 const FormProgressBar = ({ steps, currentPage, setCurrentPage }) => {
   const { trigger } = useFormContext();
@@ -23,11 +23,10 @@ const FormProgressBar = ({ steps, currentPage, setCurrentPage }) => {
       return;
     }
 
-    // Validar todos os steps anteriores primeiro
     for (let i = currentPage; i < index; i++) {
       const fields = stepFieldsMap[i];
       if (fields && !(await trigger(fields))) {
-        return; // Não avança se algum step intermediário for inválido
+        return;
       }
     }
 
@@ -35,28 +34,29 @@ const FormProgressBar = ({ steps, currentPage, setCurrentPage }) => {
   };
 
   return (
-    <div className="progress-container">
+    <S.ProgressBarContainer>
       {steps.map((step, index) => (
         <React.Fragment key={step.id}>
-          <div
-            className={`step ${index === currentPage ? 'active' : ''} ${index < currentPage ? 'completed' : ''}`}
+          <S.ProgressStep
+            step={index === currentPage ? 'active' : ''}
+            completed={index < currentPage ? 'completed' : ''}
             onClick={() => handleStepClick(index)}
           >
             {index < currentPage ? (
-              <img src={checkIcon} className="step-icon" alt="Completed" />
+              <S.StepIcon src={checkIcon} alt="Completed" />
             ) : (
-              <img src={step.icon} alt={step.title} className="step-icon" />
+              <S.StepIcon src={step.icon} alt={step.title} />
             )}
-          </div>
+          </S.ProgressStep>
 
           {index < steps.length - 1 && (
-            <div
-              className={`progress-line ${index < currentPage ? 'completed' : ''}`}
+            <S.ProgressLine
+              completed={index < currentPage ? 'completed' : ''}
             />
           )}
         </React.Fragment>
       ))}
-    </div>
+    </S.ProgressBarContainer>
   );
 };
 
