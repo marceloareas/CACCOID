@@ -1,13 +1,35 @@
 import styled from 'styled-components';
 
+const getColor = (variant) => {
+  switch (variant) {
+    case 'pendente':
+      return '#F04036';
+    case 'em_analise':
+      return 'var(--medium-yellow)';
+    case 'autorizada':
+      return 'var(--medium-green)';
+    default:
+      return 'var(--black)';
+  }
+};
+
 export const CardContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: flex-start;
+  justify-content: space-between;
   background-color: var(--white);
-  padding: 20px 10px;
+  padding: 25px 50px;
   width: 100%;
-  max-width: 1000px;
+
+  width: 80%;
+  min-width: 800px;
+  height: 200px;
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 `;
 
 export const Image = styled.img`
@@ -15,31 +37,67 @@ export const Image = styled.img`
   width: 100px;
 `;
 
-export const Title = styled.h2`
-  font-family: var(--font-title);
-  font-size: 24px;
-  color: var(--dark-blue);
-  margin: 10px 0;
+export const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 20px;
 `;
 
-export const Date = styled.p`
+export const InfoText = styled.span`
   font-family: var(--font-regular);
   font-size: 16px;
-  color: var(--dark-grey);
-  margin: 5px 0;
 `;
 
-export const Status = styled.p`
+export const InfoLabel = styled.span`
   font-family: var(--font-regular);
   font-size: 16px;
-  color: ${({ status }) =>
-    status === 'completed' ? 'var(--medium-green)' : 'var(--dark-red)'};
-  margin: 5px 0;
+  color: var(--light-grey);
 `;
 
-export const Alert = styled.p`
+export const InfoItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+
+export const Status = styled.div`
+  display: flex;
   font-family: var(--font-regular);
-  font-size: 16px;
-  color: var(--dark-red);
-  margin: 5px 0;
+  font-size: 14px;
+  background-color: #ededed;
+  border-radius: 10px;
+  padding: 5px;
+  min-width: 200px;
+  max-height: 20px;
+  align-items: center;
+
+  span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: ${({ status }) => getColor(status)};
+    margin-right: 5px;
+  }
+`;
+
+export const AlertContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 10px;
+`;
+
+export const CardActions = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+  align-items: flex-end;
+
+  button {
+    max-width: 200px;
+    width: 200px;
+  }
 `;
