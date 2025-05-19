@@ -15,10 +15,12 @@ export const StyledContainer = styled.div`
     width: 90%;
   }
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) and (min-width: ${({ theme }) =>
-    theme.breakpoints.sm}) {
+  @media (max-width: ${({ theme }) =>
+      theme.breakpoints.lg}) and (min-width: ${({ theme }) =>
+      theme.breakpoints.sm}) {
     width: 70vw;
   }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     width: 90vw;
   }
@@ -29,4 +31,13 @@ export const CenteredContainer = styled(StyledContainer)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+export const BlueRowContainer = styled(StyledContainer)`
+  background-color: var(--dark-blue);
+  flex-direction: row;
+  gap: 1rem;
+  color: var(--white);
+  width: 90%;
+  padding: 5px;
 `;

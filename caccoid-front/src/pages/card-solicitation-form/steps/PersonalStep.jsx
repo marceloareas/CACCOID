@@ -1,4 +1,4 @@
-import { GenericStep } from '../../../components/form/form-step/GenericStep';
+import { FormGenericStep } from "../../../components/FormGenericStep";
 
 export const PersonalStep = ({ formData, updateFormData }) => {
   const fields = {
@@ -31,7 +31,7 @@ export const PersonalStep = ({ formData, updateFormData }) => {
   };
 
   return (
-    <GenericStep
+    <FormGenericStep
       formData={formData}
       updateFormData={updateFormData}
       fields={fields}
