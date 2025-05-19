@@ -27,7 +27,6 @@ const GlobalStyles = createGlobalStyle`
 
 body {
     margin: 0;
-    display: flex;
     min-width: 320px;
     min-height: 100vh;
     font-family: var(--font-regular);
