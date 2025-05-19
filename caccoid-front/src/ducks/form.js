@@ -9,7 +9,6 @@ const SET_CURRENT_PAGE = 'form/SET_CURRENT_PAGE';
 
 const initialState = {
   currentPage: 0,
-  formData: {},
   steps: [
     { id: 'course', icon: schoolHatIcon, title: 'Dados do Curso' },
     { id: 'personal', icon: personIcon, title: 'Dados Pessoais' },

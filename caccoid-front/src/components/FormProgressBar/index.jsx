@@ -1,25 +1,30 @@
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { setCurrentPage } from '../../ducks/form';
 import { useFormContext } from 'react-hook-form';
 import checkIcon from '../../assets/check-icon.svg';
+
 import * as S from './styles';
+
 import React from 'react';
 
-const FormProgressBar = ({ steps, currentPage, setCurrentPage }) => {
+export const FormProgressBar = () => {
+  const dispatch = useDispatch(); 
   const { trigger } = useFormContext();
+  const { currentPage, steps } = useSelector((store) => store.form);
 
   const stepFieldsMap = {
     0: ['educationLevel', 'registration', 'courseName', 'institutionName'],
     1: ['fullName', 'rg', 'cpf', 'birthDate', 'email', 'phoneNumber'],
     2: ['enrollmentProof', 'identityFront', 'identityBack'],
-    3: ['pickupAtCampus'],
+    3: ['pickupAtCampus', 'pickupLocation'],
     4: ['studentPhoto'],
     5: ['paymentProof'],
   };
 
   const handleStepClick = async (index) => {
     if (index < currentPage) {
-      setCurrentPage(index);
+      dispatch(setCurrentPage(index)); 
       return;
     }
 
@@ -30,7 +35,7 @@ const FormProgressBar = ({ steps, currentPage, setCurrentPage }) => {
       }
     }
 
-    setCurrentPage(index);
+    dispatch(setCurrentPage(index)); 
   };
 
   return (
@@ -60,13 +65,3 @@ const FormProgressBar = ({ steps, currentPage, setCurrentPage }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  steps: state.form.steps,
-  currentPage: state.form.currentPage,
-});
-
-const mapDispatchToProps = {
-  setCurrentPage,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(FormProgressBar);

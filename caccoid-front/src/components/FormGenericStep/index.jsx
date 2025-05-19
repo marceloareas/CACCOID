@@ -12,7 +12,6 @@ export const FormGenericStep = ({ fields }) => {
   const formatDateToString = (date) =>
     date ? new Date(date).toISOString().split('T')[0] : '';
 
-  console.log(formState);
   return (
     <S.FormStep>
       <S.Title>{fields.title}</S.Title>
@@ -119,6 +118,11 @@ export const FormGenericStep = ({ fields }) => {
                     );
                   }}
                 />
+                {formState?.errors[item.name] && (
+                  <S.ErrorMessage>
+                    {formState?.errors[item.name].message}
+                  </S.ErrorMessage>
+                )}
               </S.FormGroup>
             ))}
           </S.FormColumn>

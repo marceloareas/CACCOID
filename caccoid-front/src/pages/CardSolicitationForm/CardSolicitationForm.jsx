@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { DevTool } from '@hookform/devtools';
-
 import { useSchema } from '../../hooks/useSchema';
+
 import { CourseStep } from './Steps/CourseStep';
 import { PersonalStep } from './Steps/PersonalStep';
 import { DocumentsStep } from './Steps/DocumentsStep';
@@ -16,12 +16,12 @@ import { setCurrentPage } from '../../ducks/form';
 
 import * as S from './styles';
 
-import FormProgressBar from '../../components/FormProgressBar';
-import { ActionButton } from '../../components/ActionButton';
+import { FormProgressBar } from '../../components/FormProgressBar';
 
 export const CardSolicitationForm = () => {
   const { schema } = useSchema();
   const dispatch = useDispatch();
+
   const { currentPage, steps } = useSelector((store) => store.form);
 
   const methods = useForm({
@@ -47,6 +47,15 @@ export const CardSolicitationForm = () => {
     resolver: yupResolver(schema),
     mode: 'all',
   });
+
+  const stepFieldsMap = {
+    0: ['educationLevel', 'registration', 'courseName', 'institutionName'],
+    1: ['fullName', 'rg', 'cpf', 'birthDate', 'email', 'phoneNumber'],
+    2: ['enrollmentProof', 'identityFront', 'identityBack'],
+    3: ['pickupAtCampus', 'pickupLocation'],
+    4: ['studentPhoto'],
+    5: ['paymentProof'],
+  };
 
   const onSubmit = (data) => {
     console.log('Form submitted:', data);
@@ -74,7 +83,10 @@ export const CardSolicitationForm = () => {
   return (
     <FormProvider {...methods}>
       <DevTool control={methods.control} />
-      <form style={{display:'flex', justifyContent: 'center'}} onSubmit={methods?.handleSubmit(onSubmit)}>
+      <form
+        style={{ display: 'flex', justifyContent: 'center' }}
+        onSubmit={methods?.handleSubmit(onSubmit)}
+      >
         <S.FormWindow>
           <FormProgressBar />
           {renderStepComponent()}
@@ -84,7 +96,7 @@ export const CardSolicitationForm = () => {
               <S.FormButton
                 type="button"
                 prevButton={currentPage > 0}
-                onClick={() => {
+                onClick={async () => {
                   dispatch(setCurrentPage(currentPage - 1));
                 }}
               >
@@ -95,11 +107,12 @@ export const CardSolicitationForm = () => {
             {currentPage < steps.length - 1 ? (
               <S.FormButton
                 type="button"
-                onClick={() => {
-                  console.log('Form state:', methods.formState.isValid);
-                  methods?.formState?.isValid
-                    ? dispatch(setCurrentPage(currentPage + 1))
-                    : '';
+                onClick={async () => {
+                  const fields = stepFieldsMap[currentPage];
+                  const isValid = await methods.trigger(fields);
+                  if (isValid) {
+                    dispatch(setCurrentPage(currentPage + 1));
+                  }
                 }}
               >
                 Próximo
@@ -108,7 +121,16 @@ export const CardSolicitationForm = () => {
             ) : (
               <S.FormButton
                 type="submit"
-                disabled={!methods?.formState?.isValid}
+                onClick={async (e) => {
+                  const fields = stepFieldsMap[steps.length - 1];
+                  const isValid = await methods.trigger(fields, {
+                    shouldFocus: true,
+                  });
+                  if (!isValid) {
+                    e.preventDefault();
+                    fields.forEach((field) => methods.setFocus(field));
+                  }
+                }}
               >
                 Enviar
               </S.FormButton>

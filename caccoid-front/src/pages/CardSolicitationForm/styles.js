@@ -32,9 +32,10 @@ export const FormButton = styled.button`
   justify-content: center;
   color: white;
   height: 2.5rem;
-  border-radius: 10px;
   padding: 0 10px;
-
+  height: 44px;
+  border-radius: 5px;
+  border: none;
 
   &:hover {
     opacity: 0.85;

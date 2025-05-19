@@ -5,7 +5,6 @@ export const useSchema = () => {
   const { currentPage } = useSelector((store) => store.form);
 
   let schema;
-  console.log('Current page:', currentPage);
 
   const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
@@ -55,6 +54,7 @@ export const useSchema = () => {
           .string()
           .email('E-mail inválido')
           .required('E-mail é obrigatório'),
+
         phoneNumber: yup
           .string()
           .required('Celular é obrigatório')
