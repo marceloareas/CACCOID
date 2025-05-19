@@ -11,9 +11,9 @@
     </appender>
 
     <appender name="Logtail" class="com.logtail.logback.LogtailAppender">
-        <appName>CaccoID</appName>
-        <sourceToken>Go4vN38kxbwxPHUiTd8cWKWp</sourceToken>
-        <ingestUrl>https://s1313888.eu-nbg-2.betterstackdata.com</ingestUrl >
+        <appName>${LOGTAIL_APP_NAME}</appName>
+        <sourceToken>${LOGTAIL_TOKEN}</sourceToken>
+        <ingestUrl>${LOGTAIL_INGEST_URL}</ingestUrl >
         <mdcFields>requestId,requestTime</mdcFields>
         <mdcTypes>string,int</mdcTypes>
     </appender>
