@@ -6,12 +6,10 @@ export const formatInput = ({ type, value }) => {
       .replace(/(\d{3})(\d)/, '$1.$2')
       .replace(/(\d{3})(\d{1,2})/, '$1-$2')
       .replace(/(-\d{2})\d+?$/, '$1');
+
   } else if (type === 'rg') {
-    return value
-      .replace(/\D/g, '')
-      .replace(/(\d{2})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d{1})$/, '$1-$2');
+    return value.substring(0, 20);
+
   } else if (type === 'phone') {
     return value
       .replace(/\D/g, '')
