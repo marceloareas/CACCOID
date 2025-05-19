@@ -32,38 +32,6 @@ html {
 }
 
 body {
-<<<<<<< HEAD
-    margin: 0;
-    min-width: 320px;
-    min-height: 100vh;
-    font-family: var(--font-regular);
-    background-color: var(--off-white);
-    color: var(--black);
-}
-
-h1, h2 {
-    font-family: var(--font-title);
-    color: var(--dark-blue);
-    font-weight: 400;
-}
-
-h3, h4, h5, h6 {
-    font-family: var(--font-accent);
-    font-weight: 400;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-    outline: none;
-}
-
-button {
-    font-family: inherit;
-    cursor: pointer;
-}
-`;
-=======
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -71,6 +39,5 @@ button {
   background-color: var(--off-white);
   color: var(--black);
 }`;
->>>>>>> 373aa3a41ee54cb63dd8b8f109d06db6e65230f7
 
 export default GlobalStyles;
