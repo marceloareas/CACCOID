@@ -7,6 +7,8 @@ export const useSchema = () => {
   let schema;
   console.log('Current page:', currentPage);
 
+  const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
   switch (currentPage) {
     case 0:
       schema = yup.object().shape({
@@ -80,7 +82,13 @@ export const useSchema = () => {
             return ['image/jpeg', 'image/png', 'application/pdf'].includes(
               file.type
             );
+          })
+          .test('fileSize', 'Tamanho máximo é 5MB', (value) => {
+            if (!value || value.length === 0) return true;
+            const file = value[0];
+            return file.size <= MAX_FILE_SIZE;
           }),
+
         identityFront: yup
           .mixed()
           .test('required', 'Frente da identidade é obrigatório', (value) => {
@@ -92,7 +100,13 @@ export const useSchema = () => {
             return ['image/jpeg', 'image/png', 'application/pdf'].includes(
               file.type
             );
+          })
+          .test('fileSize', 'Tamanho máximo é 5MB', (value) => {
+            if (!value || value.length === 0) return true;
+            const file = value[0];
+            return file.size <= MAX_FILE_SIZE;
           }),
+
         identityBack: yup
           .mixed()
           .test('required', 'Verso da identidade é obrigatório', (value) => {
@@ -104,6 +118,11 @@ export const useSchema = () => {
             return ['image/jpeg', 'image/png', 'application/pdf'].includes(
               file.type
             );
+          })
+          .test('fileSize', 'Tamanho máximo é 5MB', (value) => {
+            if (!value || value.length === 0) return true;
+            const file = value[0];
+            return file.size <= MAX_FILE_SIZE;
           }),
       });
       break;
@@ -111,10 +130,16 @@ export const useSchema = () => {
     case 3:
       schema = yup.object().shape({
         pickupAtCampus: yup.boolean().default(false),
-        pickupLocation: yup.string().when('pickupAtCampus', {
-          is: true,
-          then: yup.string().required('Local de retirada é obrigatório'),
-        }),
+        
+        pickupLocation: yup
+          .string()
+          .nullable()
+          .when('pickupAtCampus', {
+            is: true,
+            then: (schema) =>
+              schema.required('Local de retirada é obrigatório'),
+            otherwise: (schema) => schema.notRequired(),
+          }),
       });
       break;
 
@@ -129,6 +154,11 @@ export const useSchema = () => {
             if (!value || value.length === 0) return true;
             const file = value[0];
             return ['image/jpeg', 'image/png'].includes(file.type);
+          })
+          .test('fileSize', 'Tamanho máximo é 5MB', (value) => {
+            if (!value || value.length === 0) return true;
+            const file = value[0];
+            return file.size <= MAX_FILE_SIZE;
           }),
       });
       break;
@@ -150,6 +180,11 @@ export const useSchema = () => {
             return ['image/jpeg', 'image/png', 'application/pdf'].includes(
               file.type
             );
+          })
+          .test('fileSize', 'Tamanho máximo é 5MB', (value) => {
+            if (!value || value.length === 0) return true;
+            const file = value[0];
+            return file.size <= MAX_FILE_SIZE;
           }),
       });
       break;

@@ -15,7 +15,7 @@ export const Title = styled.h2`
   color: black;
   font-family: 'Bebas Neue', sans-serif;
   font-weight: 400;
-  font-size: 2.0rem;
+  font-size: 1.8rem;
 `
 
 export const FormGrid = styled.div`
@@ -45,7 +45,7 @@ export const FormInputLabel = styled.p`
   margin-bottom: 0.25rem;
   font-family: 'Roboto Mono', monospace;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 
   & > span {
     color: #f04036;
@@ -62,6 +62,7 @@ export const GenericInput = styled.input`
   width: 30vw;
   height: 3.5rem;
   padding-left: 0.8rem;
+  font-size: 1.25rem;
 
   &:focus, hover {
     border: 2px solid #00aaff;
@@ -72,14 +73,14 @@ export const GenericInput = styled.input`
     color: #000000;
     opacity: 0.3;
     font-family: 'Roboto Mono', monospace;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     padding-left: 0.8rem;
   }
 `
 
 export const GenericSelect = styled.select`
   font-family: 'Roboto Mono', monospace;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: black;
   background-color: white;
   border: 2px solid #d9d9d9;
@@ -112,6 +113,8 @@ export const DatePickerContainer = styled.div`
     width: 30vw;
     height: 3.5rem;
     padding-left: 0.8rem;
+    font-size: 1.25rem;
+
 
     &:focus, hover {
       border: 2px solid #00aaff;
@@ -122,7 +125,7 @@ export const DatePickerContainer = styled.div`
       color: #000000;
       opacity: 0.3;
       font-family: 'Roboto Mono', monospace;
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       padding-left: 0.8rem;
     }
   }

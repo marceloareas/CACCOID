@@ -1,32 +1,32 @@
 import { Controller, useFormContext } from 'react-hook-form';
 import uploadIcon from '../../../assets/upload-icon.svg';
 
-import './styles.css';
+import * as S from './styles';
 
 export const PaymentStep = () => {
   const {
     control,
-    formState: { errors },
+    formState,
     watch,
   } = useFormContext();
+
   const formData = watch();
 
   return (
-    <div className="form-step">
-      <h2>Comprovante de Pagamento</h2>
-      <div className="form-grid-photo-input">
-        <div className="input-file">
-          <div className="upload-icon-container">
-            <img src={uploadIcon} className="upload-icon" />
-          </div>
+    <S.FormStep>
+      <S.Title>Comprovante de Pagamento</S.Title>
+      <S.UploadInputGrid>
+        <S.UploadInputContainer>
+          <S.UploadIconContainer>
+            <img src={uploadIcon} />
+          </S.UploadIconContainer>
           <Controller
             name="paymentProof"
             control={control}
             render={({ field }) => (
               <>
-                <input
+                <S.UploadInput
                   type="file"
-                  className="photo-input"
                   accept=".jpg,.jpeg,.png"
                   onChange={(e) => field.onChange(e.target.files)}
                   key={formData.paymentProof?.[0]?.name}
@@ -36,16 +36,16 @@ export const PaymentStep = () => {
                 ) : (
                   <p>Faça o upload do arquivo desejado</p>
                 )}
-                {errors.paymentProof && (
-                  <span className="error-message">
-                    {errors.paymentProof.message}
-                  </span>
+                {formState.errors?.paymentProof && (
+                  <S.ErrorMessage>
+                    {formState.errors.paymentProof.message}
+                  </S.ErrorMessage>
                 )}
               </>
             )}
           />
-        </div>
-      </div>
-    </div>
+        </S.UploadInputContainer>
+      </S.UploadInputGrid>
+    </S.FormStep>
   );
 };

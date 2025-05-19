@@ -106,12 +106,12 @@ export const CardSolicitationForm = () => {
                 <img src={arrowIcon} alt="Próximo" />
               </S.FormButton>
             ) : (
-              <button
+              <S.FormButton
                 type="submit"
                 disabled={!methods?.formState?.isValid}
               >
                 Enviar
-              </button>
+              </S.FormButton>
             )}
           </S.FormNavigationContainer>
         </S.FormWindow>

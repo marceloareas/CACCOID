@@ -1,34 +1,33 @@
 import { Controller, useFormContext } from 'react-hook-form';
 import uploadFileIcon from '../../../assets/upload-file-icon.svg';
 
-import './styles.css';
+import * as S from './styles';
 
 export const DocumentsStep = () => {
   const {
     control,
-    formState: { errors },
+    formState,
     watch,
   } = useFormContext();
   const formData = watch();
 
   return (
-    <div className="form-step">
-      <h2>Documentos</h2>
-      <div className="form-grid">
-        <div className="form-full-column">
-          <div className="form-group">
-            <p className="form-input-label">
+    <S.FormStep>
+      <S.Title>Documentos</S.Title>
+      <S.FormGrid>
+        <S.FormColumn>
+          <S.FormGroup>
+            <S.FormInputLabel>
               Comprovante de matrícula<span>*</span>
-            </p>
-            <div className="input-document-file">
+            </S.FormInputLabel>
+            <S.DocumentInputContainer>
               <Controller
                 name="enrollmentProof"
                 control={control}
                 render={({ field }) => (
                   <>
-                    <input
+                    <S.DocumentInput
                       type="file"
-                      className="document-input"
                       accept=".jpg,.jpeg,.png,.pdf"
                       onChange={(e) => field.onChange(e.target.files)}
                       key={formData.enrollmentProof?.[0]?.name} // Força re-render ao alterar
@@ -43,28 +42,27 @@ export const DocumentsStep = () => {
                   </>
                 )}
               />
-              <img src={uploadFileIcon} className="file-icon" />
-            </div>
-            {errors.enrollmentProof && (
-              <span className="error-message">
-                {errors.enrollmentProof.message}
-              </span>
+              <S.DocumentIcon src={uploadFileIcon} />
+            </S.DocumentInputContainer>
+            {formState.errors?.enrollmentProof && (
+              <S.ErrorMessage>
+                {formState.errors.enrollmentProof.message}
+              </S.ErrorMessage>
             )}
-          </div>
+          </S.FormGroup>
 
-          <div className="form-group">
-            <p className="form-input-label">
+          <S.FormGroup>
+            <S.FormInputLabel>
               Identidade (frente)<span>*</span>
-            </p>
-            <div className="input-document-file">
+            </S.FormInputLabel>
+            <S.DocumentInputContainer>
               <Controller
                 name="identityFront"
                 control={control}
                 render={({ field }) => (
                   <>
-                    <input
+                    <S.DocumentInput
                       type="file"
-                      className="document-input"
                       accept=".jpg,.jpeg,.png,.pdf"
                       onChange={(e) => field.onChange(e.target.files)}
                       key={formData.identityFront?.[0]?.name}
@@ -79,28 +77,27 @@ export const DocumentsStep = () => {
                   </>
                 )}
               />
-              <img src={uploadFileIcon} className="file-icon" />
-            </div>
-            {errors.identityFront && (
-              <span className="error-message">
-                {errors.identityFront.message}
-              </span>
+              <S.DocumentIcon src={uploadFileIcon} />
+            </S.DocumentInputContainer>
+            {formState.errors?.identityFront && (
+              <S.ErrorMessage>
+                {formState.errors.identityFront.message}
+              </S.ErrorMessage>
             )}
-          </div>
+          </S.FormGroup>
 
-          <div className="form-group">
-            <p className="form-input-label">
+          <S.FormGroup>
+            <S.FormInputLabel>
               Identidade (verso)<span>*</span>
-            </p>
-            <div className="input-document-file">
+            </S.FormInputLabel>
+            <S.DocumentInputContainer>
               <Controller
                 name="identityBack"
                 control={control}
                 render={({ field }) => (
                   <>
-                    <input
+                    <S.DocumentInput
                       type="file"
-                      className="document-input"
                       accept=".jpg,.jpeg,.png,.pdf"
                       onChange={(e) => field.onChange(e.target.files)}
                       key={formData.identityBack?.[0]?.name}
@@ -115,16 +112,16 @@ export const DocumentsStep = () => {
                   </>
                 )}
               />
-              <img src={uploadFileIcon} className="file-icon" />
-            </div>
-            {errors.identityBack && (
-              <span className="error-message">
-                {errors.identityBack.message}
-              </span>
+              <S.DocumentIcon src={uploadFileIcon} />
+            </S.DocumentInputContainer>
+            {formState.errors?.identityBack && (
+              <S.ErrorMessage>
+                {formState.errors.identityBack.message}
+              </S.ErrorMessage>
             )}
-          </div>
-        </div>
-      </div>
-    </div>
+          </S.FormGroup>
+        </S.FormColumn>
+      </S.FormGrid>
+    </S.FormStep>
   );
 };

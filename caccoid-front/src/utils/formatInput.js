@@ -7,7 +7,11 @@ export const formatInput = ({ type, value }) => {
       .replace(/(\d{3})(\d{1,2})/, '$1-$2')
       .replace(/(-\d{2})\d+?$/, '$1');
 
-  } else if (type === 'phoneNumber') {
+  } else if (type === 'rg') {
+    return value.substring(0, 21);
+  }
+
+  else if (type === 'phoneNumber') {
     return value
       .replace(/\D/g, '')
       .replace(/^(\d{0,2})/, '($1')
