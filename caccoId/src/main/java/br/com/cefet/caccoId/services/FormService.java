@@ -3,9 +3,11 @@ package br.com.cefet.caccoId.services;
 import br.com.cefet.caccoId.dtos.FormRequestDTO;
 import br.com.cefet.caccoId.mappers.SolicitationMapper;
 import br.com.cefet.caccoId.mappers.StudentMapper;
+import br.com.cefet.caccoId.models.Solicitation;
 import br.com.cefet.caccoId.models.User;
 import br.com.cefet.caccoId.repositories.SolicitationRepository;
 import br.com.cefet.caccoId.repositories.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,21 +20,18 @@ import java.io.IOException;
 
 @Service
 public class FormService {
-    private final StudentRepository studentRepository;
-    private final SolicitationRepository solicitationRepository;
-    private final StudentMapper studentMapper;
-    private final SolicitationMapper solicitationMapper;
+    @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
+    private SolicitationRepository solicitationRepository;
+    @Autowired
+    private StudentMapper studentMapper;
+    @Autowired
+    private SolicitationMapper solicitationMapper;
+    @Autowired
+    private SolicitationService solicitationService;
     private static final Logger log = LoggerFactory.getLogger(FormService.class);
 
-    public FormService(StudentRepository studentRepository,
-                       StudentMapper studentMapper,
-                       SolicitationMapper solicitationMapper,
-                       SolicitationRepository solicitationRepository){
-        this.studentRepository = studentRepository;
-        this.studentMapper = studentMapper;
-        this.solicitationMapper = solicitationMapper;
-        this.solicitationRepository = solicitationRepository;
-    }
 
     public void registerStudent(FormRequestDTO formRequestDTO)
             throws IllegalArgumentException, DataIntegrityViolationException{
@@ -57,8 +56,9 @@ public class FormService {
 
                 try {
                     var solicitation = solicitationMapper.toEntity(formRequestDTO.getSolicitation());
-                    solicitation.setStudent(studentSaved);
-                    var solicitationSaved = solicitationRepository.save(solicitation);
+                    var filledSolicitation = solicitationService.setSolicitationInitialValues(solicitation);
+                    filledSolicitation.setStudent(studentSaved);
+                    var solicitationSaved = solicitationRepository.save(filledSolicitation);
                     log.info("Solicitação do estudante {} registrada com sucesso. ID: {}", studentSaved.getId(), solicitationSaved.getId());
                 }catch (Exception ex){
                     log.error("Falha ao salvar solicitação: {}", ex.getMessage());
