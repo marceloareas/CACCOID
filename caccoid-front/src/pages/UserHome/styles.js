@@ -5,8 +5,8 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
-  padding: 150px;
+  gap: 40px;
+  padding: 100px;
 `;
 
 export const NewButton = styled.button`
@@ -19,13 +19,10 @@ export const NewButton = styled.button`
   background-color: var(--medium-green);
   color: var(--white);
   border: none;
-  min-width: 320px;
   height: 92px;
-
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px;
-  font-weight: 200;
   max-width: 200px;
+
+  cursor: pointer;
 `;
 
 export const ContainerInfo = styled.div`
@@ -33,13 +30,36 @@ export const ContainerInfo = styled.div`
   align-items: center;
   justify-content: center;
   background-color: var(--white);
+
+  width: 80%;
+  min-width: 800px;
+  height: 200px;
 `;
 
 export const NoContentTitle = styled.h1`
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'Roboto Condensed', sans-serif;
   font-size: 20px;
   font-weight: 200;
   color: var(--black);
   text-align: center;
-  margin-top: 50px;
 `;
+
+export const LabelPage = styled.div`
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: var(--dark-blue);
+  color: var(--white);
+  border: none;
+  
+  min-width: 280px;
+  height: 92px;
+`;
+
+export const LabelButton = styled.label`
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  font-weight: 200;
+`
