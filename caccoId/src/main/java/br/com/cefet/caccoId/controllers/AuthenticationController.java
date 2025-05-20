@@ -4,6 +4,7 @@ import br.com.cefet.caccoId.dtos.ApiResponseDTO;
 import br.com.cefet.caccoId.dtos.AuthenticationDTO;
 import br.com.cefet.caccoId.dtos.UserRegisterDTO;
 import br.com.cefet.caccoId.models.User;
+import br.com.cefet.caccoId.models.enums.UserRole;
 import br.com.cefet.caccoId.repositories.UserRepository;
 import br.com.cefet.caccoId.services.AuthorizationService;
 import jakarta.validation.Valid;
@@ -47,11 +48,27 @@ public class AuthenticationController {
         }
 
         var encryptedPassword = new BCryptPasswordEncoder().encode(userRegisterDTO.getPassword());
-        var newUser = new User(userRegisterDTO.getEmail(), encryptedPassword, userRegisterDTO.getRole());
+        var newUser = new User(userRegisterDTO.getEmail(), encryptedPassword, UserRole.USER);
 
         this.userRepository.save(newUser);
 
         var response = new ApiResponseDTO<>(true, "Usuário registrado com sucesso.", null);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @PostMapping("/admin/create")
+    public ResponseEntity<ApiResponseDTO<Object>> createAdmin(@Valid @RequestBody UserRegisterDTO userRegisterDTO){
+        if(this.userRepository.findByEmail(userRegisterDTO.getEmail()) != null){
+            var response = new ApiResponseDTO<>(false, "Já existe um usuário com esse e-mail.", null);
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        var encryptedPassword = new BCryptPasswordEncoder().encode(userRegisterDTO.getPassword());
+        var newUser = new User(userRegisterDTO.getEmail(), encryptedPassword, UserRole.ADMIN);
+
+        this.userRepository.save(newUser);
+
+        var response = new ApiResponseDTO<>(true, "Administrador criado com sucesso.", null);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

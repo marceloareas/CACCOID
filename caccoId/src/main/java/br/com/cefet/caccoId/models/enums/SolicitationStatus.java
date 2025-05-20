@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public enum SolicitationStatus {
-    UNDER_REVIEW("Em análise"),
-    PENDING("Pendente"),
-    AUTHORIZED("Autorizada");
+    UNDER_REVIEW("EM_ANALISE"),
+    PENDING("PENDENTE"),
+    AUTHORIZED("AUTORIZADA");
 
     private final String status;
 

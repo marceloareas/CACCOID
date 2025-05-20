@@ -22,14 +22,15 @@ public class SolicitationController {
         try {
             var solicitation = solicitationService.getStatus();
             var requestDate = solicitation.getRequestDate();
-            var requestDateFormated = String.format("%s/%s/%s",
+
+            var requestDateFormated = String.format("%02d/%02d/%d",
                     requestDate.getDayOfMonth(),
                     requestDate.getMonthValue(),
                     requestDate.getYear());
             var body = Map.of(
                     "studentName", solicitation.getStudent().getName(),
                     "requestDate", requestDateFormated,
-                    "status", solicitation.getStatus().ordinal());
+                    "status", solicitation.getStatus().getStatus());
             var response = new ApiResponseDTO<>(true, "Dados da solicitação retornados com sucesso.", body);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }catch (Exception e){
