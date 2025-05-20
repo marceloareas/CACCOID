@@ -10,15 +10,14 @@ import { ErrorMessage } from '../components/LabeledInput/styles';
 
 const ContainerWrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 2rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 2rem; /* ou mais, se precisar de distância extra do azul */
+  justify-content: center;
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     flex-direction: column;
+    align-items: center;
   }
 `;
 
@@ -43,11 +42,23 @@ const StyledDiv = styled.div`
   margin: 1rem;
   flex: 0;
   white-space: nowrap;
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    justify-content: center;
+    flex-direction: column;
+  }
 `;
 
 const BlueContainerDiv = styled.div`
-  justify-content: center;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    flex-direction: column; !important;
+    text-align: center; !important;
+  }
 `;
 
 export default function EmailAuth() {
@@ -100,14 +111,14 @@ export default function EmailAuth() {
           <form onSubmit={handleLoginSubmit}>
             <LabeledInput
               title="E-mail"
-              placeholder="Digite seu e-mail"
+              placeholder="📧 Digite seu e-mail"
               type="email"
               value={loginEmail}
               onChange={(val) => setLoginEmail(val)}
             />
             <LabeledInput
               title="Senha"
-              placeholder="Digite sua senha"
+              placeholder="🔒 Digite sua senha"
               type="password"
               value={loginPassword}
               onChange={(val) => setLoginPassword(val)}
@@ -125,21 +136,21 @@ export default function EmailAuth() {
           <form onSubmit={handleRegisterSubmit}>
             <LabeledInput
               title="E-mail"
-              placeholder="Digite seu e-mail"
+              placeholder="📧 Digite seu e-mail"
               type="email"
               value={registerEmail}
               onChange={(val) => setRegisterEmail(val)}
             />
             <LabeledInput
               title="Senha"
-              placeholder="Digite sua senha"
+              placeholder="🔒 Digite sua senha"
               type="password"
               value={registerPassword}
               onChange={(val) => setRegisterPassword(val)}
             />
             <LabeledInput
               title="Confirme sua senha"
-              placeholder="Confirme sua senha"
+              placeholder="🔒 Confirme sua senha"
               type="password"
               value={confirmPassword}
               onChange={(val) => setConfirmPassword(val)}
