@@ -5,8 +5,14 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 40px;
-  padding: 100px;
+  gap: 30px;
+  padding: 20px;
+`;
+
+export const HeaderPage = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;
 
 export const NewButton = styled.button`
@@ -53,8 +59,9 @@ export const LabelPage = styled.div`
   background-color: var(--dark-blue);
   color: var(--white);
   border: none;
-  
+
   min-width: 280px;
+  max-width: 280px;
   height: 92px;
 `;
 
@@ -62,4 +69,5 @@ export const LabelButton = styled.label`
   font-family: 'Bebas Neue', sans-serif;
   font-size: 32px;
   font-weight: 200;
-`
+`;
+export const ToastArea = styled.div``;
