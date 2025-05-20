@@ -1,65 +1,13 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import Container from '../components/Container';
-import UnderlinedTitle from '../components/UnderlinedTitle';
-import { ActionButton } from '../components/ActionButton';
-import MicrosoftLogo from '../assets/microsoft-logo.svg';
-import LabeledInput from '../components/LabeledInput';
-import { ErrorMessage } from '../components/LabeledInput/styles';
-
-const ContainerWrapper = styled.div`
-  display: flex;
-  align-items: stretch;
-  gap: 2rem;
-  margin-top: 2rem; /* ou mais, se precisar de distância extra do azul */
-  justify-content: center;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    flex-direction: column;
-    align-items: center;
-  }
-`;
-
-const StyledH3 = styled.h3`
-  color: var(--white);
-  margin: 1rem;
-  flex: 1;
-`;
-
-const MicrosoftIcon = styled.img`
-  height: 20px;
-  width: 30px;
-  scale: 1.4;
-  margin-right: 10px;
-  align-self: center;
-`;
-
-const StyledDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  margin: 1rem;
-  flex: 0;
-  white-space: nowrap;
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    justify-content: center;
-    flex-direction: column;
-  }
-`;
-
-const BlueContainerDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    flex-direction: column; !important;
-    text-align: center; !important;
-  }
-`;
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import * as S from './styles';
+import Container from '../../components/Container';
+import UnderlinedTitle from '../../components/UnderlinedTitle';
+import { ActionButton } from '../../components/ActionButton';
+import MicrosoftLogo from '../../assets/microsoft-logo.svg';
+import LabeledInput from '../../components/LabeledInput';
+import { useAPI } from '../../hooks/useAPI';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function EmailAuth() {
   const [loginEmail, setLoginEmail] = useState('');
@@ -67,14 +15,38 @@ export default function EmailAuth() {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [setPasswordError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
-  const handleLoginSubmit = (e) => {
+  const api = useAPI();
+  const navigate = useNavigate();
+  const { login } = useAuth();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/home');
+    }
+  }, []);
+
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    // Chamar a API depois
+    try {
+      const response = await api.post('/auth/login', {
+        email: loginEmail,
+        password: loginPassword,
+      });
+
+      const token = response.data.result.token;
+      login(token);
+      alert('Login realizado com sucesso');
+      navigate('/home');
+    } catch (error) {
+      console.error('Erro no login:', error);
+      alert('Senha ou e-mail inválido');
+    }
   };
 
-  const handleRegisterSubmit = (e) => {
+  const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     if (registerPassword !== confirmPassword) {
       setPasswordError('As senhas não coincidem');
@@ -82,28 +54,43 @@ export default function EmailAuth() {
     } else {
       setPasswordError('');
     }
-    // Chamar a API depois
+
+    try {
+      await api.post('/auth/register', {
+        email: registerEmail,
+        password: registerPassword,
+      });
+
+      alert('Cadastro realizado com sucesso');
+    } catch (error) {
+      if (error.response?.status === 409) {
+        alert('E-mail já cadastrado');
+      } else {
+        console.error('Erro no registro:', error);
+        alert('Usuário já cadastrado');
+      }
+    }
   };
 
   return (
     <>
-      <BlueContainerDiv>
+      <S.BlueContainerDiv>
         <Container variant="blueRow">
-          <StyledH3>
+          <S.StyledH3>
             Tenha sua carteirinha de estudante com praticidade!
             <br />
             <strong>Acesse com seu e-mail institucional do CEFET-RJ:</strong>
-          </StyledH3>
-          <StyledDiv>
+          </S.StyledH3>
+          <S.StyledDiv>
             <ActionButton variant="quaternary">
-              <MicrosoftIcon src={MicrosoftLogo} />
+              <S.MicrosoftIcon src={MicrosoftLogo} />
               FAÇA LOGIN COM CONTA MICROSOFT
             </ActionButton>
-          </StyledDiv>
+          </S.StyledDiv>
         </Container>
-      </BlueContainerDiv>
+      </S.BlueContainerDiv>
 
-      <ContainerWrapper>
+      <S.ContainerWrapper>
         <Container>
           <UnderlinedTitle color="var(--light-grey)">
             Faça login com seu e-mail pessoal
@@ -157,12 +144,13 @@ export default function EmailAuth() {
               confirmPassword
               password={registerPassword}
             />
+            {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
             <ActionButton variant="tertiary" type="submit">
               REGISTRE-SE
             </ActionButton>
           </form>
         </Container>
-      </ContainerWrapper>
+      </S.ContainerWrapper>
     </>
   );
 }

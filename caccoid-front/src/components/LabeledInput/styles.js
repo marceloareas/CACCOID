@@ -27,8 +27,7 @@ export const Input = styled.input`
 
   &:hover,
   &:focus {
-    border-color: ${({ hasError }) =>
-      hasError ? 'var(--dark-red)' : 'var(--medium-blue)'};
+    border-color: ${({ hasError }) => hasError ? 'var(--dark-red)' : 'var(--medium-blue)'};
   }
 `;
 
