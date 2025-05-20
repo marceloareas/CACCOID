@@ -8,6 +8,7 @@ import MicrosoftLogo from '../../assets/microsoft-logo.svg';
 import LabeledInput from '../../components/LabeledInput';
 import { useAPI } from '../../hooks/useAPI';
 import { useAuth } from '../../contexts/AuthContext';
+import { toast } from 'react-toastify';
 
 export default function EmailAuth() {
   const [loginEmail, setLoginEmail] = useState('');
@@ -15,7 +16,6 @@ export default function EmailAuth() {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
 
   const api = useAPI();
   const navigate = useNavigate();
@@ -38,22 +38,16 @@ export default function EmailAuth() {
 
       const token = response.data.result.token;
       login(token);
-      alert('Login realizado com sucesso');
+      toast.success('Login realizado com sucesso');
       navigate('/home');
     } catch (error) {
-      console.error('Erro no login:', error);
-      alert('Senha ou e-mail inválido');
+      toast.error(error.response?.data?.message || 'Erro ao fazer login');
     }
   };
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    if (registerPassword !== confirmPassword) {
-      setPasswordError('As senhas não coincidem');
-      return;
-    } else {
-      setPasswordError('');
-    }
+    if (registerPassword !== confirmPassword) return;
 
     try {
       await api.post('/auth/register', {
@@ -61,13 +55,13 @@ export default function EmailAuth() {
         password: registerPassword,
       });
 
-      alert('Cadastro realizado com sucesso');
+      toast.success('Cadastro realizado com sucesso');
     } catch (error) {
       if (error.response?.status === 409) {
-        alert('E-mail já cadastrado');
+        toast.error(error.response?.data?.message);
       } else {
         console.error('Erro no registro:', error);
-        alert('Usuário já cadastrado');
+        toast.error(error.response?.data?.message || 'Erro ao registrar');
       }
     }
   };
@@ -144,7 +138,6 @@ export default function EmailAuth() {
               confirmPassword
               password={registerPassword}
             />
-            {passwordError && <p style={{ color: 'red' }}>{passwordError}</p>}
             <ActionButton variant="tertiary" type="submit">
               REGISTRE-SE
             </ActionButton>

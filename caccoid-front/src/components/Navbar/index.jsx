@@ -4,14 +4,20 @@ import userIcon from '../../assets/user-icon.svg';
 import { ActionButton } from '../ActionButton';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const { userName, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout();
-    navigate('/microsoft-auth');
+    try {
+      logout();
+      toast.success('Logout realizado com sucesso');
+      navigate('/microsoft-auth');
+    } catch (error) {
+      toast.error(error.message || 'Erro ao realizar logout');
+    }
   };
 
   return (

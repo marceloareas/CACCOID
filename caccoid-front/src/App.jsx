@@ -11,10 +11,16 @@ import { ThemeProvider } from 'styled-components';
 import theme from './theme';
 import UserHome from './pages/UserHome';
 import { AuthProvider } from './contexts/AuthContext';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
     <>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+      />
       <AuthProvider>
         <ThemeProvider theme={theme}>
           <GlobalStyles />
