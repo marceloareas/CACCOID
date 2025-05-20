@@ -44,4 +44,16 @@ public class StudentRequestDTO {
     @NotNull(message = "A data de nascimento é obrigatória")
     @Past(message = "A data de nascimento deve estar no passado")
     private LocalDate dateOfBirth;
+
+    @Pattern(
+            regexp = "^\\d{7}[A-Za-z]{3}$",
+            message = "A matrícula deve conter 7 dígitos seguidos de 3 letras.")
+    @NotBlank(message = "A matrícula é obrigatória e não pode estar em branco")
+    private String enrollmentNumber;
+
+    @NotBlank(message = "O curso é obrigatório e não pode estar em branco")
+    private String program;
+
+    @NotBlank(message = "A instituição é obrigatória e não pode estar em branco")
+    private String institution;
 }

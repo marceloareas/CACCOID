@@ -1,10 +1,8 @@
 package br.com.cefet.caccoId.dtos;
 
-import br.com.cefet.caccoId.models.Student;
+import jakarta.persistence.Lob;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -13,7 +11,13 @@ import java.time.LocalDateTime;
 public class SolicitationRequestDTO {
     private boolean virtualOnly;
 
+    private String pickupLocation;
+
     private MultipartFile enrollmentProof;
 
-    private MultipartFile identityDocument;
+    private MultipartFile identityDocumentFront;
+
+    private MultipartFile identityDocumentBack;
+
+    private MultipartFile studentPhoto;
 }

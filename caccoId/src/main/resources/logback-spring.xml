@@ -10,8 +10,17 @@
         <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
     </appender>
 
+    <appender name="Logtail" class="com.logtail.logback.LogtailAppender">
+        <appName>${LOGTAIL_APP_NAME}</appName>
+        <sourceToken>${LOGTAIL_TOKEN}</sourceToken>
+        <ingestUrl>${LOGTAIL_INGEST_URL}</ingestUrl >
+        <mdcFields>requestId,requestTime</mdcFields>
+        <mdcTypes>string,int</mdcTypes>
+    </appender>
+
     <logger name="br.com.cefet.caccoId" level="INFO" additivity="false">
         <appender-ref ref="JSON_FILE"/>
+        <appender-ref ref="Logtail"/>
     </logger>
 
     <logger name="br.com.cefet.caccoId.CaccoIdApplication" level="OFF" additivity="false"/>

@@ -28,3 +28,8 @@ management:
   endpoint:
     health:
       show-details: always
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET}

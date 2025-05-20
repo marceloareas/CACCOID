@@ -28,4 +28,14 @@ public class Student {
     private String telephone;
 
     private LocalDate dateOfBirth;
+
+    private String enrollmentNumber;
+
+    private String program;
+
+    private String institution;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
