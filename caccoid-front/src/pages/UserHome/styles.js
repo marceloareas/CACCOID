@@ -26,7 +26,6 @@ export const NewButton = styled.button`
   color: var(--white);
   border: none;
   height: 92px;
-  max-width: 200px;
 
   cursor: pointer;
 `;

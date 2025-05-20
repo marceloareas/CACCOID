@@ -4,15 +4,19 @@ import * as S from './styles';
 import { CardUserOrder } from '../../components/CardUserOrder';
 import ContactForm from '../../components/ContactForm';
 import ToastAlert from '../../components/ToastAlert';
+import { useDetailOrder } from '../../hooks/useDetailOrder';
+import Loading from '../../components/Loading';
 
 export default function UserHome() {
   const navigate = useNavigate();
-
   const alertToast = true;
+  const { data, loading } = useDetailOrder();
 
-  const data = true;
+  if (loading) {
+    return <Loading />;
+  }
 
-  if (!data) {
+  if (!data || !loading) {
     return (
       <S.Container>
         <S.NewButton
@@ -36,20 +40,20 @@ export default function UserHome() {
   return (
     <S.Container>
       <S.HeaderPage>
-      <S.ToastArea>
-        {alertToast && (
-          <ToastAlert alertMessage="Sua última solicitação foi indeferida, faça um novo pedido!" />
-        )}
-      </S.ToastArea>
-      <S.LabelPage>
-        <S.LabelButton>Solicitação</S.LabelButton>
-      </S.LabelPage>
-        </S.HeaderPage>
+        <S.ToastArea>
+          {alertToast && (
+            <ToastAlert alertMessage="Sua última solicitação foi indeferida, faça um novo pedido!" />
+          )}
+        </S.ToastArea>
+        <S.LabelPage>
+          <S.LabelButton>Solicitação</S.LabelButton>
+        </S.LabelPage>
+      </S.HeaderPage>
 
       {data && (
         <CardUserOrder
-          title={data?.name}
-          date={data?.date}
+          title={data?.studentName}
+          date={data?.requestDate}
           status={data?.status}
           isEditAvailable
         />

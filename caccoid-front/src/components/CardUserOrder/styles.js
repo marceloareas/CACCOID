@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 const getColor = (variant) => {
   switch (variant) {
-    case 'pendente':
+    case 'PENDENTE':
       return '#F04036';
-    case 'em_analise':
+    case 'EM_ANALISE':
       return 'var(--medium-yellow)';
-    case 'autorizada':
+    case 'AUTORIZADA':
       return 'var(--medium-green)';
     default:
       return 'var(--black)';
