@@ -19,6 +19,4 @@ public class UserRegisterDTO {
 
     @NotBlank(message = "A senha é obrigatória e não pode estar em branco")
     private String password;
-
-    private UserRole role;
 }
