@@ -12,6 +12,20 @@ export const CardUserOrder = ({
   srcImg,
   isEditAvailable = false,
 }) => {
+
+  const getLabel = (status) => {
+    switch (status) {
+      case 'PENDENTE':
+        return 'Pendente';
+      case 'AUTORIZADA':
+        return 'Autorizada';
+      case 'EM_ANALISE':
+        return 'Em análise';
+      default:
+        return '';
+    }
+  };
+
   return (
     <S.CardContainer className={className}>
       <S.Content>
@@ -26,7 +40,7 @@ export const CardUserOrder = ({
             <S.InfoLabel>Status</S.InfoLabel>
             <S.Status status={status}>
               <span />
-              {status}
+              {getLabel(status)}
             </S.Status>
           </S.InfoItem>
         </S.InfoContainer>

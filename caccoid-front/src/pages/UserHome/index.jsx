@@ -10,23 +10,32 @@ import Loading from '../../components/Loading';
 export default function UserHome() {
   const navigate = useNavigate();
   const alertToast = true;
-  const { data, loading } = useDetailOrder();
+  const { data, loading, error } = useDetailOrder();
 
   if (loading) {
     return <Loading />;
   }
 
-  if (!data || !loading) {
+  if (error || data?.rejected || (!data && !loading)) {
     return (
       <S.Container>
-        <S.NewButton
-          onClick={() => {
-            navigate('/form');
-          }}
-        >
-          <img src={addIcon} alt="Logo" sizes="24px" />
-          <S.LabelButton>Solicitar carteirinha</S.LabelButton>
-        </S.NewButton>
+        <S.HeaderPage>
+          {data?.rejected && (
+            <S.ToastArea>
+              {alertToast && (
+                <ToastAlert alertMessage="Sua última solicitação foi indeferida, faça um novo pedido!" />
+              )}
+            </S.ToastArea>
+          )}
+          <S.NewButton
+            onClick={() => {
+              navigate('/form');
+            }}
+          >
+            <img src={addIcon} alt="Logo" sizes="24px" />
+            <S.LabelButton>Solicitar carteirinha</S.LabelButton>
+          </S.NewButton>
+        </S.HeaderPage>
 
         <S.ContainerInfo>
           <S.NoContentTitle>
@@ -39,23 +48,16 @@ export default function UserHome() {
 
   return (
     <S.Container>
-      <S.HeaderPage>
-        <S.ToastArea>
-          {alertToast && (
-            <ToastAlert alertMessage="Sua última solicitação foi indeferida, faça um novo pedido!" />
-          )}
-        </S.ToastArea>
-        <S.LabelPage>
-          <S.LabelButton>Solicitação</S.LabelButton>
-        </S.LabelPage>
-      </S.HeaderPage>
+      <S.LabelPage>
+        <S.LabelButton>Solicitação</S.LabelButton>
+      </S.LabelPage>
 
       {data && (
         <CardUserOrder
           title={data?.studentName}
           date={data?.requestDate}
           status={data?.status}
-          isEditAvailable
+          isEditAvailable={data?.pendingEdit}
         />
       )}
       <ContactForm />

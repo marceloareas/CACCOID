@@ -28,12 +28,10 @@ export const useAPI = (hasFile) => {
       return response;
     },
     (error) => {
-      if (error.response.status === 401) {
-        // Redirecionar para a página de login ou exibir uma mensagem de erro
+      if (error.response.status === 403) {
         console.error('Token inválido ou expirado.');
       }
       if (error.response.status === 500) {
-        // Redirecionar para tela de indisponivel
         console.error('Erro interno do servidor.');
       }
       return Promise.reject(error);

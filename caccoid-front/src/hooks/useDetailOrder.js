@@ -15,7 +15,7 @@ export const useDetailOrder = () => {
 
       try {
         const response = await api.get('/solicitation');
-        setData(response.data.result);
+        setData(response?.data?.result);
       } catch (err) {
         console.error('Erro ao buscar dados:', err);
         setError(err);
