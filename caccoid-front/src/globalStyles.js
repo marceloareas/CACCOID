@@ -38,6 +38,17 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
   background-color: var(--off-white);
   color: var(--black);
+}
+
+h1, h2 {
+  font-family: var(--font-title);
+  color: var(--dark-blue);
+  font-weight: 400;
+}
+
+h3, h4, h5, h6 {
+  font-family: var(--font-accent);
+  font-weight: 400;
 }`;
 
 export default GlobalStyles;

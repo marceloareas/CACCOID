@@ -16,8 +16,7 @@ export const StyledContainer = styled.div`
   }
 
   @media (max-width: ${({ theme }) =>
-      theme.breakpoints.lg}) and (min-width: ${({ theme }) =>
-      theme.breakpoints.sm}) {
+    theme.breakpoints.lg}) and (min-width: ${({ theme }) => theme.breakpoints.sm}) {
     width: 70vw;
   }
 

@@ -45,7 +45,7 @@ const Logo = styled.img`
 
 const NavbarTitle = styled.span`
   font-family: var(--font-title);
-  font-size: 2rem;
+  font-size: 3rem;
   letter-spacing: 1px;
 `;
 
