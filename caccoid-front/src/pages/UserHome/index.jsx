@@ -58,6 +58,7 @@ export default function UserHome() {
           date={data?.requestDate}
           status={data?.status}
           isEditAvailable={data?.pendingEdit}
+          srcImg={data?.photo}
         />
       )}
       <ContactForm />

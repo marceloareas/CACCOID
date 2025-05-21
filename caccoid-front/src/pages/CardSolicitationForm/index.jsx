@@ -169,7 +169,7 @@ export const CardSolicitationForm = () => {
         <Loading />
       ) : (
         <FormProvider {...methods}>
-          <DevTool control={methods.control} />
+          {/* <DevTool control={methods.control} /> */}
           <form
             style={{ display: 'flex', justifyContent: 'center' }}
             onSubmit={methods?.handleSubmit(onSubmit)}
