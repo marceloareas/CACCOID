@@ -56,4 +56,7 @@ public class StudentRequestDTO {
 
     @NotBlank(message = "A instituição é obrigatória e não pode estar em branco")
     private String institution;
+
+    @NotBlank(message = "O nível de ensino é obrigatório e não pode estar em branco")
+    private String educationLevel;
 }
