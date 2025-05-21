@@ -6,7 +6,7 @@ import * as S from './styles';
 export const LocationStep = () => {
   const { control, watch, setValue, formState } = useFormContext();
 
-  const pickupAtCampus = watch('pickupAtCampus');
+  const virtualOnly = watch('virtualOnly');
 
   const pickupOptions = [
     { value: '', label: 'Selecione um local de retirada' },
@@ -14,8 +14,8 @@ export const LocationStep = () => {
   ];
 
   useEffect(() => {
-    setValue('pickupAtCampus', pickupAtCampus || false);
-  }, [pickupAtCampus, setValue]);
+    setValue('virtualOnly', virtualOnly || false);
+  }, [virtualOnly, setValue]);
 
   return (
     <S.FormStep>
@@ -24,7 +24,7 @@ export const LocationStep = () => {
         <S.FormColumn>
           <S.FormGroup>
             <Controller
-              name="pickupAtCampus"
+              name="virtualOnly"
               control={control}
               render={({ field }) => (
                 <S.Checkbox>
@@ -42,7 +42,7 @@ export const LocationStep = () => {
             />
           </S.FormGroup>
 
-          {pickupAtCampus && (
+          {virtualOnly && (
             <S.FormGroup>
               <S.FormInputLabel>Local de retirada</S.FormInputLabel>
               <Controller

@@ -27,7 +27,7 @@ export const FormGenericStep = ({ fields }) => {
                 name={item.name}
                 control={control}
                 render={({ field }) => {
-                  return item.name === 'birthDate' ? (
+                  return item.name === 'dateOfBirth' ? (
                     <S.DatePickerContainer>
                       <DatePicker
                         selected={field.value ? new Date(field.value) : null}
@@ -82,7 +82,7 @@ export const FormGenericStep = ({ fields }) => {
                   name={item.name}
                   control={control}
                   render={({ field }) => {
-                    return item.name === 'birthDate' ? (
+                    return item.name === 'dateOfBirth' ? (
                       <S.DatePickerContainer>
                         <DatePicker
                           selected={field.value ? new Date(field.value) : null}

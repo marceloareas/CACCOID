@@ -11,7 +11,7 @@ export const formatInput = ({ type, value }) => {
     return value.substring(0, 21);
   }
 
-  else if (type === 'phoneNumber') {
+  else if (type === 'telephone') {
     return value
       .replace(/\D/g, '')
       .replace(/^(\d{0,2})/, '($1')

@@ -12,21 +12,27 @@ export const useSchema = () => {
     case 0:
       schema = yup.object().shape({
         educationLevel: yup.string().required('Nível de ensino é obrigatório'),
-        registration: yup
+
+        enrollmentNumber: yup
           .string()
           .required('Matrícula é obrigatória')
-          .matches(
-            /^[0-9]{7}[a-zA-Z]{3}$/,
-            'Formato inválido (7 números + 3 letras)'
-          ),
-        courseName: yup.string().required('Curso é obrigatório'),
-        institutionName: yup.string().required('Instituição é obrigatória'),
+          .when('educationLevel', {
+            is: (value) => value === 'graduacao',
+            then: (schema) =>
+              schema
+                .matches(/^[0-9]{7}[a-zA-Z]{3}$/, 'Formato inválido (7 números + 3 letras)'),
+            otherwise: (schema) => schema.matches(/^[0-9]{7}[a-zA-Z]{4}$/, 'Formato inválido (7 números + 4 letras)'),
+          }),
+
+        program: yup.string().required('Curso é obrigatório'),
+
+        institution: yup.string().required('Instituição é obrigatória'),
       });
       break;
 
     case 1:
       schema = yup.object().shape({
-        fullName: yup
+        name: yup
           .string()
           .required('Nome completo é obrigatório')
           .min(3, 'Mínimo 3 caracteres'),
@@ -41,7 +47,7 @@ export const useSchema = () => {
           .required('RG é obrigatório')
           .max(20, 'Número máximo de caracteres é 20.'),
 
-        birthDate: yup
+        dateOfBirth: yup
           .string()
           .required('Data de nascimento é obrigatória')
           .test('valid-date', 'Data inválida', (value) => {
@@ -55,7 +61,7 @@ export const useSchema = () => {
           .email('E-mail inválido')
           .required('E-mail é obrigatório'),
 
-        phoneNumber: yup
+        telephone: yup
           .string()
           .required('Celular é obrigatório')
           .matches(
@@ -89,7 +95,7 @@ export const useSchema = () => {
             return file.size <= MAX_FILE_SIZE;
           }),
 
-        identityFront: yup
+        identityDocumentFront: yup
           .mixed()
           .test('required', 'Frente da identidade é obrigatório', (value) => {
             return value && value.length > 0;
@@ -107,7 +113,7 @@ export const useSchema = () => {
             return file.size <= MAX_FILE_SIZE;
           }),
 
-        identityBack: yup
+        identityDocumentBack: yup
           .mixed()
           .test('required', 'Verso da identidade é obrigatório', (value) => {
             return value && value.length > 0;
@@ -129,12 +135,12 @@ export const useSchema = () => {
 
     case 3:
       schema = yup.object().shape({
-        pickupAtCampus: yup.boolean().default(false),
+        virtualOnly: yup.boolean().default(false),
         
         pickupLocation: yup
           .string()
           .nullable()
-          .when('pickupAtCampus', {
+          .when('virtualOnly', {
             is: true,
             then: (schema) =>
               schema.required('Local de retirada é obrigatório'),

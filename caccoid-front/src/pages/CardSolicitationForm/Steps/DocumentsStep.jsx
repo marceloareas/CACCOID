@@ -57,7 +57,7 @@ export const DocumentsStep = () => {
             </S.FormInputLabel>
             <S.DocumentInputContainer>
               <Controller
-                name="identityFront"
+                name="identityDocumentFront"
                 control={control}
                 render={({ field }) => (
                   <>
@@ -65,11 +65,11 @@ export const DocumentsStep = () => {
                       type="file"
                       accept=".jpg,.jpeg,.png,.pdf"
                       onChange={(e) => field.onChange(e.target.files)}
-                      key={formData.identityFront?.[0]?.name}
+                      key={formData.identityDocumentFront?.[0]?.name}
                     />
-                    {formData.identityFront?.[0]?.name ? (
+                    {formData.identityDocumentFront?.[0]?.name ? (
                       <p>
-                        Arquivo selecionado: {formData.identityFront[0].name}
+                        Arquivo selecionado: {formData.identityDocumentFront[0].name}
                       </p>
                     ) : (
                       <p>Faça upload do arquivo</p>
@@ -79,9 +79,9 @@ export const DocumentsStep = () => {
               />
               <S.DocumentIcon src={uploadFileIcon} />
             </S.DocumentInputContainer>
-            {formState.errors?.identityFront && (
+            {formState.errors?.identityDocumentFront && (
               <S.ErrorMessage>
-                {formState.errors.identityFront.message}
+                {formState.errors.identityDocumentFront.message}
               </S.ErrorMessage>
             )}
           </S.FormGroup>
@@ -92,7 +92,7 @@ export const DocumentsStep = () => {
             </S.FormInputLabel>
             <S.DocumentInputContainer>
               <Controller
-                name="identityBack"
+                name="identityDocumentBack"
                 control={control}
                 render={({ field }) => (
                   <>
@@ -100,11 +100,11 @@ export const DocumentsStep = () => {
                       type="file"
                       accept=".jpg,.jpeg,.png,.pdf"
                       onChange={(e) => field.onChange(e.target.files)}
-                      key={formData.identityBack?.[0]?.name}
+                      key={formData.identityDocumentBack?.[0]?.name}
                     />
-                    {formData.identityBack?.[0]?.name ? (
+                    {formData.identityDocumentBack?.[0]?.name ? (
                       <p>
-                        Arquivo selecionado: {formData.identityBack[0].name}
+                        Arquivo selecionado: {formData.identityDocumentBack[0].name}
                       </p>
                     ) : (
                       <p>Faça upload do arquivo</p>
@@ -114,9 +114,9 @@ export const DocumentsStep = () => {
               />
               <S.DocumentIcon src={uploadFileIcon} />
             </S.DocumentInputContainer>
-            {formState.errors?.identityBack && (
+            {formState.errors?.identityDocumentBack && (
               <S.ErrorMessage>
-                {formState.errors.identityBack.message}
+                {formState.errors.identityDocumentBack.message}
               </S.ErrorMessage>
             )}
           </S.FormGroup>

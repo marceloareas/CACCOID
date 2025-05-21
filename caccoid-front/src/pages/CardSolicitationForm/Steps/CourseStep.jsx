@@ -31,19 +31,19 @@ export const CourseStep = () => {
         inputOptions: educationLevels,
       },
       {
-        name: 'registration',
+        name: 'enrollmentNumber',
         label: 'Matrícula',
         placeholder: 'Ex: 2112290BCC',
         pattern: '^[0-9]{7}[a-zA-Z]{3}$',
       },
       {
-        name: 'courseName',
+        name: 'program',
         label: 'Curso',
         inputType: 'select',
         inputOptions: courses,
       },
       {
-        name: 'institutionName',
+        name: 'institution',
         label: 'Instituição de ensino',
         inputType: 'select',
         inputOptions: institutions,

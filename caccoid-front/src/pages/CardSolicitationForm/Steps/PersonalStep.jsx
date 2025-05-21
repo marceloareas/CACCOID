@@ -5,7 +5,7 @@ export const PersonalStep = () => {
     title: 'Dados pessoais',
     column1: [
       {
-        name: 'fullName',
+        name: 'name',
         label: 'Nome Completo',
         placeholder: 'Digite seu nome completo',
       },
@@ -22,7 +22,7 @@ export const PersonalStep = () => {
         placeholder: '000.000.000-00' 
       },
       { 
-        name: 'birthDate', 
+        name: 'dateOfBirth', 
         label: 'Data de nascimento', 
         type: 'date' 
       },
@@ -35,7 +35,7 @@ export const PersonalStep = () => {
         placeholder: 'seu@email.com',
       },
       {
-        name: 'phoneNumber',
+        name: 'telephone',
         label: 'Celular',
         type: 'phone',
         placeholder: '(00) 00000-0000',
