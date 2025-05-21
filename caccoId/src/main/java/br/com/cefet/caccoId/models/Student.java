@@ -35,6 +35,8 @@ public class Student {
 
     private String institution;
 
+    private String educationLevel;
+
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
