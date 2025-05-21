@@ -38,7 +38,7 @@ export const CardSolicitationForm = () => {
       educationLevel: '',
       enrollmentNumber: '',
       program: '',
-      instituion: '',
+      institution: '',
       name: '',
       rg: '',
       cpf: '',
@@ -58,7 +58,7 @@ export const CardSolicitationForm = () => {
   });
 
   const stepFieldsMap = {
-    0: ['educationLevel', 'enrollmentNumber', 'program', 'instituion'],
+    0: ['educationLevel', 'enrollmentNumber', 'program', 'institution'],
     1: ['name', 'rg', 'cpf', 'dateOfBirth', 'email', 'telephone'],
     2: ['enrollmentProof', 'identityDocumentFront', 'identityDocumentBack'],
     3: ['virtualOnly', 'pickupLocation'],
@@ -71,16 +71,62 @@ export const CardSolicitationForm = () => {
     setLoading(true);
 
     try {
+      const studentFields = [
+        'name',
+        'rg',
+        'cpf',
+        'dateOfBirth',
+        'email',
+        'telephone',
+        'program',
+        'institution',
+        'educationLevel',
+        'enrollmentNumber',
+      ];
+
+      const solicitationFields = [
+        'enrollmentProof',
+        'identityDocumentFront',
+        'identityDocumentBack',
+        'virtualOnly',
+        'pickupLocation',
+        'studentPhoto',
+        'paymentProof',
+      ];
+
+      const fileFields = [
+        'enrollmentProof',
+        'identityDocumentFront',
+        'identityDocumentBack',
+        'studentPhoto',
+        'paymentProof',
+      ];
+
       const formData = new FormData();
-      Object.entries(data).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          formData.append(key, value);
+
+      // Student fields (sempre string ou valor simples)
+      studentFields.forEach((field) => {
+        if (data[field] !== undefined && data[field] !== null) {
+          formData.append(`student.${field}`, data[field]);
         }
       });
 
+      // Solicitation fields
+      solicitationFields.forEach((field) => {
+        if (data[field] !== undefined && data[field] !== null) {
+          // Se for campo de arquivo, só adiciona se for File/Blob
+          if (fileFields.includes(field) && data[field] instanceof File) {
+            formData.append(`solicitation.${field}`, data[field]);
+          }
+          // Para campos simples (boolean, string)
+          else if (!fileFields.includes(field)) {
+            formData.append(`solicitation.${field}`, data[field]);
+          }
+        }
+      });
       const response = await api.post('/form/register-student', formData);
 
-      if (!response.ok) {
+      if (response.status < 200 || response.status >= 300) {
         const errorMessage = `Erro ao enviar solicitação. Status: ${response.status}`;
         throw new Error(errorMessage);
       }
@@ -91,7 +137,6 @@ export const CardSolicitationForm = () => {
       );
 
       navigate('/home');
-      
     } catch (error) {
       setLoading(false);
 

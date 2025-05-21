@@ -28,11 +28,11 @@ export const PaymentStep = () => {
                 <S.UploadInput
                   type="file"
                   accept=".jpg,.jpeg,.png"
-                  onChange={(e) => field.onChange(e.target.files)}
-                  key={formData.paymentProof?.[0]?.name}
+                  onChange={(e) => field.onChange(e.target.files[0])}
+                  key={formData.paymentProof?.name}
                 />
-                {formData.paymentProof?.[0]?.name ? (
-                  <p>Arquivo selecionado: {formData.paymentProof[0].name}</p>
+                {formData.paymentProof?.name ? (
+                  <p>Arquivo selecionado: {formData.paymentProof?.name}</p>
                 ) : (
                   <p>Faça o upload do arquivo desejado</p>
                 )}

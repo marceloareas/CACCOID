@@ -29,12 +29,12 @@ export const DocumentsStep = () => {
                     <S.DocumentInput
                       type="file"
                       accept=".jpg,.jpeg,.png,.pdf"
-                      onChange={(e) => field.onChange(e.target.files)}
-                      key={formData.enrollmentProof?.[0]?.name} // Força re-render ao alterar
+                      onChange={(e) => field.onChange(e.target.files[0])}
+                      key={formData.enrollmentProof?.name} // Força re-render ao alterar
                     />
-                    {formData.enrollmentProof?.[0]?.name ? (
+                    {formData.enrollmentProof?.name ? (
                       <p>
-                        Arquivo selecionado: {formData.enrollmentProof[0].name}
+                        Arquivo selecionado: {formData.enrollmentProof.name}
                       </p>
                     ) : (
                       <p>Faça upload do arquivo</p>
@@ -64,12 +64,12 @@ export const DocumentsStep = () => {
                     <S.DocumentInput
                       type="file"
                       accept=".jpg,.jpeg,.png,.pdf"
-                      onChange={(e) => field.onChange(e.target.files)}
-                      key={formData.identityDocumentFront?.[0]?.name}
+                      onChange={(e) => field.onChange(e.target.files[0])}
+                      key={formData.identityDocumentFront?.name}
                     />
-                    {formData.identityDocumentFront?.[0]?.name ? (
+                    {formData.identityDocumentFront?.name ? (
                       <p>
-                        Arquivo selecionado: {formData.identityDocumentFront[0].name}
+                        Arquivo selecionado: {formData.identityDocumentFront.name}
                       </p>
                     ) : (
                       <p>Faça upload do arquivo</p>
@@ -99,12 +99,12 @@ export const DocumentsStep = () => {
                     <S.DocumentInput
                       type="file"
                       accept=".jpg,.jpeg,.png,.pdf"
-                      onChange={(e) => field.onChange(e.target.files)}
-                      key={formData.identityDocumentBack?.[0]?.name}
+                      onChange={(e) => field.onChange(e.target.files[0])}
+                      key={formData.identityDocumentBack?.name}
                     />
-                    {formData.identityDocumentBack?.[0]?.name ? (
+                    {formData.identityDocumentBack?.name ? (
                       <p>
-                        Arquivo selecionado: {formData.identityDocumentBack[0].name}
+                        Arquivo selecionado: {formData.identityDocumentBack.name}
                       </p>
                     ) : (
                       <p>Faça upload do arquivo</p>

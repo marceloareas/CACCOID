@@ -28,11 +28,11 @@ export const PhotoStep = () => {
                 <S.UploadInput
                   type="file"
                   accept=".jpg,.jpeg,.png"
-                  onChange={(e) => field.onChange(e.target.files)}
-                  key={formData.studentPhoto?.[0]?.name}
+                  onChange={(e) => field.onChange(e.target.files[0])}
+                  key={formData.studentPhoto?.name}
                 />
-                {formData.studentPhoto?.[0]?.name ? (
-                  <p>Arquivo selecionado: {formData.studentPhoto[0].name}</p>
+                {formData.studentPhoto?.name ? (
+                  <p>Arquivo selecionado: {formData.studentPhoto.name}</p>
                 ) : (
                   <p>Faça o upload do arquivo desejado</p>
                 )}

@@ -19,9 +19,15 @@ export const useSchema = () => {
           .when('educationLevel', {
             is: (value) => value === 'graduacao',
             then: (schema) =>
-              schema
-                .matches(/^[0-9]{7}[a-zA-Z]{3}$/, 'Formato inválido (7 números + 3 letras)'),
-            otherwise: (schema) => schema.matches(/^[0-9]{7}[a-zA-Z]{4}$/, 'Formato inválido (7 números + 4 letras)'),
+              schema.matches(
+                /^[0-9]{7}[a-zA-Z]{3}$/,
+                'Formato inválido (7 números + 3 letras)'
+              ),
+            otherwise: (schema) =>
+              schema.matches(
+                /^[0-9]{7}[a-zA-Z]{4}$/,
+                'Formato inválido (7 números + 4 letras)'
+              ),
           }),
 
         program: yup.string().required('Curso é obrigatório'),
@@ -79,56 +85,50 @@ export const useSchema = () => {
             'required',
             'Comprovante de matrícula é obrigatório',
             (value) => {
-              return value && value.length > 0;
+              return value instanceof File;
             }
           )
           .test('fileType', 'Apenas JPG, PNG ou PDF', (value) => {
-            if (!value || value.length === 0) return true;
-            const file = value[0];
+            if (!value) return true;
             return ['image/jpeg', 'image/png', 'application/pdf'].includes(
-              file.type
+              value.type
             );
           })
           .test('fileSize', 'Tamanho máximo é 5MB', (value) => {
-            if (!value || value.length === 0) return true;
-            const file = value[0];
-            return file.size <= MAX_FILE_SIZE;
+            if (!value) return true;
+            return value.size <= MAX_FILE_SIZE;
           }),
 
         identityDocumentFront: yup
           .mixed()
           .test('required', 'Frente da identidade é obrigatório', (value) => {
-            return value && value.length > 0;
+            return value instanceof File;
           })
           .test('fileType', 'Apenas JPG, PNG ou PDF', (value) => {
-            if (!value || value.length === 0) return true;
-            const file = value[0];
+            if (!value) return true;
             return ['image/jpeg', 'image/png', 'application/pdf'].includes(
-              file.type
+              value.type
             );
           })
           .test('fileSize', 'Tamanho máximo é 5MB', (value) => {
-            if (!value || value.length === 0) return true;
-            const file = value[0];
-            return file.size <= MAX_FILE_SIZE;
+            if (!value) return true;
+            return value.size <= MAX_FILE_SIZE;
           }),
 
         identityDocumentBack: yup
           .mixed()
           .test('required', 'Verso da identidade é obrigatório', (value) => {
-            return value && value.length > 0;
+            return value instanceof File;
           })
           .test('fileType', 'Apenas JPG, PNG ou PDF', (value) => {
-            if (!value || value.length === 0) return true;
-            const file = value[0];
+            if (!value) return true;
             return ['image/jpeg', 'image/png', 'application/pdf'].includes(
-              file.type
+              value.type
             );
           })
           .test('fileSize', 'Tamanho máximo é 5MB', (value) => {
-            if (!value || value.length === 0) return true;
-            const file = value[0];
-            return file.size <= MAX_FILE_SIZE;
+            if (!value) return true;
+            return value.size <= MAX_FILE_SIZE;
           }),
       });
       break;
@@ -136,7 +136,7 @@ export const useSchema = () => {
     case 3:
       schema = yup.object().shape({
         virtualOnly: yup.boolean().default(false),
-        
+
         pickupLocation: yup
           .string()
           .nullable()
@@ -154,17 +154,15 @@ export const useSchema = () => {
         studentPhoto: yup
           .mixed()
           .test('required', 'Foto é obrigatória', (value) => {
-            return value && value.length > 0;
+            return value instanceof File;
           })
           .test('fileType', 'Apenas JPG ou PNG', (value) => {
-            if (!value || value.length === 0) return true;
-            const file = value[0];
-            return ['image/jpeg', 'image/png'].includes(file.type);
+            if (!value) return true;
+            return ['image/jpeg', 'image/png'].includes(value.type);
           })
           .test('fileSize', 'Tamanho máximo é 5MB', (value) => {
-            if (!value || value.length === 0) return true;
-            const file = value[0];
-            return file.size <= MAX_FILE_SIZE;
+            if (!value) return true;
+            return value.size <= MAX_FILE_SIZE;
           }),
       });
       break;
@@ -177,20 +175,18 @@ export const useSchema = () => {
             'required',
             'Comprovante de pagamento é obrigatório',
             (value) => {
-              return value && value.length > 0;
+              return value instanceof File;
             }
           )
           .test('fileType', 'Apenas JPG, PNG ou PDF', (value) => {
-            if (!value || value.length === 0) return true;
-            const file = value[0];
+            if (!value) return true;
             return ['image/jpeg', 'image/png', 'application/pdf'].includes(
-              file.type
+              value.type
             );
           })
           .test('fileSize', 'Tamanho máximo é 5MB', (value) => {
-            if (!value || value.length === 0) return true;
-            const file = value[0];
-            return file.size <= MAX_FILE_SIZE;
+            if (!value) return true;
+            return value.size <= MAX_FILE_SIZE;
           }),
       });
       break;
