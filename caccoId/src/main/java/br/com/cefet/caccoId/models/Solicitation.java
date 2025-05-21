@@ -34,6 +34,10 @@ public class Solicitation {
 
     private String pickupLocation;
 
+    private Boolean rejected;
+
+    private Boolean pendingEdit;
+
     @OneToOne
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
@@ -49,4 +53,7 @@ public class Solicitation {
 
     @Lob
     private byte[] studentPhoto;
+
+    @Lob
+    private byte[] paymentProof;
 }
