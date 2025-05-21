@@ -33,7 +33,9 @@ public class SolicitationController {
                     "studentName", solicitation.getStudent().getName(),
                     "requestDate", requestDateFormated,
                     "status", solicitation.getStatus().getStatus(),
-                    "photo", "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(solicitation.getStudentPhoto()));
+                    "photo", "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(solicitation.getStudentPhoto()),
+                    "rejected", solicitation.getRejected(),
+                    "pendingEdit", solicitation.getPendingEdit());
             var response = new ApiResponseDTO<>(true, "Dados da solicitação retornados com sucesso.", body);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         }catch(NullPointerException e){
