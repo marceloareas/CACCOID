@@ -17,7 +17,7 @@ public class SolicitationService {
     @Autowired
     private SolicitationRepository solicitationRepository;
 
-    public Solicitation getStatus(){
+    public Solicitation getSolicitation(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = (User) auth.getPrincipal();
         return solicitationRepository.getSolicitationStatusByLoggedUser(user.getId());
@@ -30,7 +30,7 @@ public class SolicitationService {
             throw new IllegalArgumentException("Status inválido.");
         }
 
-        var solicitation = this.getStatus();
+        var solicitation = this.getSolicitation();
         SolicitationStatus updatedStatus = statuses[newStatus];
 
         if (solicitation.getStatus().equals(updatedStatus)) {
@@ -55,6 +55,8 @@ public class SolicitationService {
         }
         ZonedDateTime zonedNow = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"));
         solicitation.setRequestDate(zonedNow.toLocalDateTime());
+        solicitation.setPendingEdit(false);
+        solicitation.setRejected(false);
         return solicitation;
     }
 

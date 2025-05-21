@@ -20,4 +20,6 @@ public class SolicitationRequestDTO {
     private MultipartFile identityDocumentBack;
 
     private MultipartFile studentPhoto;
+
+    private MultipartFile paymentProof;
 }

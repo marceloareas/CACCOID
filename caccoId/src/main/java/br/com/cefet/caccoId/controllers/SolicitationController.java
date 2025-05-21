@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.Map;
 
 @RestController
@@ -20,7 +22,7 @@ public class SolicitationController {
     @GetMapping()
     public ResponseEntity<ApiResponseDTO<?>> GetStatus(){
         try {
-            var solicitation = solicitationService.getStatus();
+            var solicitation = solicitationService.getSolicitation();
             var requestDate = solicitation.getRequestDate();
 
             var requestDateFormated = String.format("%02d/%02d/%d",
@@ -30,10 +32,15 @@ public class SolicitationController {
             var body = Map.of(
                     "studentName", solicitation.getStudent().getName(),
                     "requestDate", requestDateFormated,
-                    "status", solicitation.getStatus().getStatus());
+                    "status", solicitation.getStatus().getStatus(),
+                    "photo", "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(solicitation.getStudentPhoto()));
             var response = new ApiResponseDTO<>(true, "Dados da solicitação retornados com sucesso.", body);
             return ResponseEntity.status(HttpStatus.OK).body(response);
-        }catch (Exception e){
+        }catch(NullPointerException e){
+            var response = new ApiResponseDTO<>(false, "Esse usuário não possui uma solicitação ativa.", null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+        catch (Exception e){
             var response = new ApiResponseDTO<>(false, "Falha ao retornar dados da solicitação: " + e.getMessage(), null);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }

@@ -12,7 +12,8 @@ public interface SolicitationMapper {
             @Mapping(source = "enrollmentProof", target = "enrollmentProof", qualifiedByName = "multipartFileToBytes"),
             @Mapping(source = "identityDocumentFront", target = "identityDocumentFront", qualifiedByName = "multipartFileToBytes"),
             @Mapping(source = "identityDocumentBack", target = "identityDocumentBack", qualifiedByName = "multipartFileToBytes"),
-            @Mapping(source = "studentPhoto", target = "studentPhoto", qualifiedByName = "multipartFileToBytes")
+            @Mapping(source = "studentPhoto", target = "studentPhoto", qualifiedByName = "multipartFileToBytes"),
+            @Mapping(source = "paymentProof", target = "paymentProof", qualifiedByName = "multipartFileToBytes")
     })
     Solicitation toEntity(SolicitationRequestDTO dto);
 }
