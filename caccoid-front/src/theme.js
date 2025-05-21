@@ -1,7 +1,3 @@
-import '@fontsource/bebas-neue';
-import '@fontsource/roboto-mono';
-import '@fontsource/roboto-condensed';
-
 export const theme = {
   breakpoints: {
     sm: '480px',
