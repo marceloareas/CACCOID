@@ -60,7 +60,6 @@ export default function EmailAuth() {
       if (error.response?.status === 409) {
         toast.error(error.response?.data?.message);
       } else {
-        console.error('Erro no registro:', error);
         toast.error(error.response?.data?.message || 'Erro ao registrar');
       }
     }

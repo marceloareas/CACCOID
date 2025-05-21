@@ -39,4 +39,8 @@ export const Button = styled.button`
   font-family: 'Bebas Neue', sans-serif;
   font-size: ${(props) => (props.size === 'small' ? '10px' : '24px')};
   font-weight: 400;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
