@@ -4,8 +4,6 @@ O **CaccoID** é um sistema moderno e gratuito para emissão de carteirinhas est
 
 Desenvolvido para o **CACCO** (Centro Acadêmico do BCC), o CaccoID surge como uma alternativa ao sistema atual, trazendo mais **segurança, autonomia, automação** e foco nas necessidades reais dos estudantes.
 
----
-
 ## 💡 O que é o CaccoID?
 
 O CaccoID é um sistema online onde o aluno pode:
@@ -17,8 +15,6 @@ O CaccoID é um sistema online onde o aluno pode:
 
 É uma plataforma **feita por alunos, para alunos**, com foco em acessibilidade, praticidade e modernização dos processos internos do CACCO.
 
----
-
 ## ✨ Principais Destaques
 
 - **Carteirinhas digitais com QR-Code:** cada carteirinha tem um código único que permite verificação de autenticidade instantânea.
@@ -28,8 +24,6 @@ O CaccoID é um sistema online onde o aluno pode:
 - **Notificações por e-mail:** avisos importantes são enviados ao longo do processo.
 - **Sistema dedicado ao BCC:** construído com base nas demandas específicas dos alunos do curso.
 
----
-
 ## 🎯 Por que criamos o CaccoID?
 
 A experiência com o sistema atual de emissão de carteirinhas mostrou algumas limitações:
@@ -38,8 +32,6 @@ A experiência com o sistema atual de emissão de carteirinhas mostrou algumas l
 - Interface pouco intuitiva.
 - Dificuldade para saber em que etapa do processo a carteirinha estava.
 - Pouca visibilidade para os administradores gerenciarem as solicitações.
-
----
 
 ## 🛠️ Como funciona o processo?
 
@@ -52,8 +44,6 @@ A experiência com o sistema atual de emissão de carteirinhas mostrou algumas l
 4. A carteirinha é gerada com data de validade e QR-Code.
 5. O aluno pode acessá-la digitalmente e acompanhar tudo por e-mail.
 
----
-
 ## 🤝 Para quem é este projeto?
 
 Este sistema é destinado:
@@ -62,8 +52,6 @@ Este sistema é destinado:
 - Aos **representantes do CACCO**, que agora terão mais controle e agilidade no processo de emissão.
 - A possíveis **parceiros e apoiadores** que queiram entender e apoiar a iniciativa estudantil.
 
----
-
 ## 📈 Futuro do projeto
 
 O CaccoID está sendo desenvolvido com tecnologias modernas e pensado para escalar. Futuramente, ele poderá:
@@ -71,8 +59,6 @@ O CaccoID está sendo desenvolvido com tecnologias modernas e pensado para escal
 - Incluir carteirinhas físicas integradas.
 - Servir como modelo para outros cursos da universidade.
 - Ser expandido para integrações com eventos e serviços estudantis.
-
----
 
 ## 💬 Dúvidas ou sugestões?
 
