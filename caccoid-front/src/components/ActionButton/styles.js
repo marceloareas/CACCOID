@@ -9,7 +9,7 @@ const getColor = (variant) => {
     case 'tertiary':
       return 'var(--dark-grey)';
     case 'quaternary':
-      return 'var(--medium-grey)';
+      return 'var(--light-grey)';
     case 'danger':
       return 'var(--dark-red)';
     default:
@@ -28,6 +28,7 @@ export const Button = styled.button`
   max-width: ${(props) => (props.size === 'large' ? '182px' : 'auto')};
   height: 44px;
   border-radius: 5px;
+  border: none;
 
   color: ${(props) => (props.disabled ? 'var(--black)' : 'var(--white)')};
   background-color: ${(props) =>
@@ -37,4 +38,5 @@ export const Button = styled.button`
 
   font-family: 'Bebas Neue', sans-serif;
   font-size: ${(props) => (props.size === 'small' ? '10px' : '24px')};
+  font-weight: 400;
 `;

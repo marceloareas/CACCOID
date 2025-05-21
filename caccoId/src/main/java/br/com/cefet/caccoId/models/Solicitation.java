@@ -1,5 +1,6 @@
 package br.com.cefet.caccoId.models;
 
+import br.com.cefet.caccoId.models.enums.SolicitationStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +20,7 @@ public class Solicitation {
 
     private boolean virtualOnly;
 
-    private int status;
+    private SolicitationStatus status;
 
     private LocalDateTime requestDate;
 
@@ -31,6 +32,12 @@ public class Solicitation {
 
     private boolean paid;
 
+    private String pickupLocation;
+
+    private Boolean rejected;
+
+    private Boolean pendingEdit;
+
     @OneToOne
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
@@ -39,5 +46,14 @@ public class Solicitation {
     private byte[] enrollmentProof;
 
     @Lob
-    private byte[] identityDocument;
+    private byte[] identityDocumentFront;
+
+    @Lob
+    private byte[] identityDocumentBack;
+
+    @Lob
+    private byte[] studentPhoto;
+
+    @Lob
+    private byte[] paymentProof;
 }

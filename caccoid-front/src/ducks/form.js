@@ -6,21 +6,9 @@ import locationIcon from '../assets/location-icon.svg';
 import creditCardIcon from '../assets/credit-card-icon.svg';
 
 const SET_CURRENT_PAGE = 'form/SET_CURRENT_PAGE';
-const UPDATE_FORM_DATA = 'form/UPDATE_FORM_DATA';
-
-const serializeFileList = (fileList) => {
-  if (!fileList || fileList.length === 0) return null;
-  return Array.from(fileList).map((file) => ({
-    name: file.name,
-    size: file.size,
-    type: file.type,
-    lastModified: file.lastModified,
-  }));
-};
 
 const initialState = {
   currentPage: 0,
-  formData: {},
   steps: [
     { id: 'course', icon: schoolHatIcon, title: 'Dados do Curso' },
     { id: 'personal', icon: personIcon, title: 'Dados Pessoais' },
@@ -38,29 +26,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         currentPage: action.payload,
       };
-    case UPDATE_FORM_DATA:
-      const newData = { ...action.payload };
 
-      const fileFields = [
-        'enrollmentProof',
-        'identityFront',
-        'identityBack',
-        'studentPhoto',
-        'paymentProof',
-      ];
-      fileFields.forEach((field) => {
-        if (newData[field] instanceof FileList) {
-          newData[field] = serializeFileList(newData[field]);
-        }
-      });
-
-      return {
-        ...state,
-        formData: {
-          ...state.formData,
-          ...action.payload,
-        },
-      };
     default:
       return state;
   }
@@ -73,7 +39,3 @@ export const setCurrentPage = (page) => ({
   payload: page,
 });
 
-export const updateFormData = (data) => ({
-  type: UPDATE_FORM_DATA,
-  payload: data,
-});

@@ -12,6 +12,7 @@ const GlobalStyles = createGlobalStyle`
     --medium-green: #279666;
     --dark-grey: #383838;
     --light-grey: #6E6E6E;
+    --lightest-grey: #E3E3E2;
     --medium-yellow: #FBE540;
     --white: #FFFFFF;
     --black: #000000;
@@ -22,40 +23,32 @@ const GlobalStyles = createGlobalStyle`
 }
 
 * {
-    box-sizing: border-box;
+    box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    display: flex;
-    min-width: 320px;
-    min-height: 100vh;
-    font-family: var(--font-regular);
-    background-color: var(--off-white);
-    color: var(--black);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: var(--off-white);
+  color: var(--black);
 }
 
 h1, h2 {
-    font-family: var(--font-title);
-    color: var(--dark-blue);
-    font-weight: 400;
+  font-family: var(--font-title);
+  color: var(--dark-blue);
+  font-weight: 400;
 }
 
 h3, h4, h5, h6 {
-    font-family: var(--font-accent);
-    font-weight: 400;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-    outline: none;
-}
-
-button {
-    font-family: inherit;
-    cursor: pointer;
-}
-`;
+  font-family: var(--font-accent);
+  font-weight: 400;
+}`;
 
 export default GlobalStyles;

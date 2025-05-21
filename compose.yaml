@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  service-backend:
+    build:
+      context: ./caccoId
+      cache_from: []
+    container_name: backend
+    ports:
+      - "8080:8080"
+    networks:
+      - caccoid
+    env_file:
+      - ./caccoId/.env
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health || exit 1"]
+      interval: 10s
+      retries: 5
+      start_period: 20s
+      timeout: 5s
+
+networks:
+  caccoid:

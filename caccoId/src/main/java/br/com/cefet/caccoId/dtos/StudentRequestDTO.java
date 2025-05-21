@@ -21,10 +21,10 @@ public class StudentRequestDTO {
     private String email;
 
     @NotBlank(message = "O rg é obrigatório não pode estar em branco")
-    @Pattern(
-            regexp = "^(\\d{2}\\.\\d{3}\\.\\d{3}-\\d{1}|\\d{9})$",
-            message = "RG deve estar no formato XX.XXX.XXX-X ou XXXXXXXXX"
-    )
+//    @Pattern(
+//            regexp = "^(\\d{2}\\.\\d{3}\\.\\d{3}-\\d{1}|\\d{9})$",
+//            message = "RG deve estar no formato XX.XXX.XXX-X ou XXXXXXXXX"
+//    )
     private String rg;
 
     @NotBlank(message = "O cpf é obrigatório e não pode estar em branco")
@@ -35,13 +35,28 @@ public class StudentRequestDTO {
     private String cpf;
 
     @NotBlank(message = "O telefone é obrigatório e não pode estar em branco")
-    @Pattern(
-            regexp = "^(\\d{10,11}|\\(\\d{2}\\)\\s?\\d{4,5}-?\\d{4})$",
-            message = "Telefone deve conter 10 ou 11 dígitos, com ou sem formatação"
-    )
+//    @Pattern(
+//            regexp = "^(\\d{10,11}|\\(\\d{2}\\)\\s?\\d{4,5}-?\\d{4})$",
+//            message = "Telefone deve conter 10 ou 11 dígitos, com ou sem formatação"
+//    )
     private String telephone;
 
     @NotNull(message = "A data de nascimento é obrigatória")
     @Past(message = "A data de nascimento deve estar no passado")
     private LocalDate dateOfBirth;
+
+    @Pattern(
+            regexp = "^\\d{7}[A-Za-z]{3}$",
+            message = "A matrícula deve conter 7 dígitos seguidos de 3 letras.")
+    @NotBlank(message = "A matrícula é obrigatória e não pode estar em branco")
+    private String enrollmentNumber;
+
+    @NotBlank(message = "O curso é obrigatório e não pode estar em branco")
+    private String program;
+
+    @NotBlank(message = "A instituição é obrigatória e não pode estar em branco")
+    private String institution;
+
+    @NotBlank(message = "O nível de ensino é obrigatório e não pode estar em branco")
+    private String educationLevel;
 }
